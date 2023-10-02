@@ -4,6 +4,9 @@
  */
 package nutricionista;
 
+import AccesoADatos.PacienteData;
+import entidades.Paciente;
+
 /**
  *
  * @author Enzo-PC
@@ -14,7 +17,11 @@ public class Nutricionista {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        PacienteData pd = new PacienteData();
+        
+        
+        
+       pd.bajaPaciente(12);
     }
     
 }

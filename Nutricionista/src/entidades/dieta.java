@@ -8,6 +8,6 @@ package entidades;
  *
  * @author Enzo-PC
  */
-public class dieta {
+public class Dieta {
     
 }
