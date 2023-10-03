@@ -6,6 +6,7 @@ package nutricionista;
 
 import AccesoADatos.PacienteData;
 import entidades.Paciente;
+import vistas.viewMenu;
 
 /**
  *
@@ -17,8 +18,11 @@ public class Nutricionista {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        PacienteData pd = new PacienteData();
         
+        viewMenu menu = new viewMenu();
+        
+        menu.setVisible(true);
+        menu.setLocationRelativeTo(null);
         
         
        
