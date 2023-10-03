@@ -1,20 +1,34 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package vistas;
+
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 
 /**
  *
  * @author Enzo-PC
  */
-public class viewAltaPaciente extends javax.swing.JFrame {
-
+public class viewAltaPaciente extends javax.swing.JPanel {
+    
     /**
-     * Creates new form viewAltaPaciente
+     * Creates new form viewAltaPacientes
      */
     public viewAltaPaciente() {
         initComponents();
+        this.setSize(1280, 630);
+        Border bordeInferior = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK);
+        txtNombre.setBorder(bordeInferior);
+        txtDni.setBorder(bordeInferior);
+        txtNombre3.setBorder(bordeInferior);
+        txtDomicilio.setBorder(bordeInferior);
+        
+        //Cambiar logos, para los buttons menu.
+      //boton.setIcon(new ImageIcon("ruta/a/otra/imagen.png")); 
+        
     }
 
     /**
@@ -26,48 +40,138 @@ public class viewAltaPaciente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtDni = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtDomicilio = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtNombre3 = new javax.swing.JTextField();
+        btnAltaPaciente = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setBackground(new java.awt.Color(89, 116, 146));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(89, 116, 146));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Subir nuevo Paciente");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 270, 40));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Nombre");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Pacientes.png"))); // NOI18N
+        txtNombre.setBackground(new java.awt.Color(89, 116, 146));
+        txtNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(89, 116, 146));
+        txtNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 260, 40));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(jLabel1)
-                .addContainerGap(972, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 6, Short.MAX_VALUE))
-        );
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("DNI");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 90));
+        txtDni.setBackground(new java.awt.Color(89, 116, 146));
+        txtDni.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtDni.setForeground(new java.awt.Color(0, 0, 0));
+        txtDni.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDniActionPerformed(evt);
+            }
+        });
+        add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 260, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1280, 720));
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Domicilio");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 100, -1));
 
-        pack();
+        txtDomicilio.setBackground(new java.awt.Color(89, 116, 146));
+        txtDomicilio.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtDomicilio.setForeground(new java.awt.Color(0, 0, 0));
+        txtDomicilio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtDomicilio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDomicilioActionPerformed(evt);
+            }
+        });
+        add(txtDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 260, 40));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Telefono");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 80, -1));
+
+        txtNombre3.setBackground(new java.awt.Color(89, 116, 146));
+        txtNombre3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtNombre3.setForeground(new java.awt.Color(0, 0, 0));
+        txtNombre3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtNombre3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombre3ActionPerformed(evt);
+            }
+        });
+        add(txtNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 260, 40));
+
+        btnAltaPaciente.setBackground(new java.awt.Color(0, 153, 204));
+        btnAltaPaciente.setForeground(new java.awt.Color(0, 0, 0));
+        btnAltaPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Group 1.png"))); // NOI18N
+        btnAltaPaciente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAltaPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaPacienteActionPerformed(evt);
+            }
+        });
+        add(btnAltaPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, 180, 70));
+
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 2, 10, 630));
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDniActionPerformed
+
+    private void txtDomicilioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDomicilioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDomicilioActionPerformed
+
+    private void txtNombre3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombre3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombre3ActionPerformed
+
+    private void btnAltaPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaPacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAltaPacienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAltaPaciente;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtDomicilio;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombre3;
     // End of variables declaration//GEN-END:variables
 }

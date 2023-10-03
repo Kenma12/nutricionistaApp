@@ -4,17 +4,23 @@
  */
 package vistas;
 
+import java.awt.BorderLayout;
+
 /**
  *
  * @author Enzo-PC
  */
 public class viewMenu extends javax.swing.JFrame {
-
+    viewAltaPaciente vAlta = new viewAltaPaciente();
     /**
      * Creates new form viewMenu
      */
     public viewMenu() {
         initComponents();
+      
+        vAlta.setSize(500, 300);
+        vAlta.setLocation(0, 0);
+        
     }
 
     /**
@@ -27,8 +33,11 @@ public class viewMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        btnViewAltaAlum = new javax.swing.JButton();
-        Content = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        btnAltaPacienteView = new javax.swing.JButton();
+        btnAltaDietasView = new javax.swing.JButton();
+        btnAltaComidasView = new javax.swing.JButton();
+        content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -37,38 +46,59 @@ public class viewMenu extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnViewAltaAlum.setBackground(new java.awt.Color(255, 255, 255));
-        btnViewAltaAlum.setForeground(new java.awt.Color(255, 255, 255));
-        btnViewAltaAlum.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Pacientes.png"))); // NOI18N
-        btnViewAltaAlum.setBorder(null);
-        btnViewAltaAlum.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setFont(new java.awt.Font("Georgia", 2, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(89, 116, 146));
+        jLabel4.setText(" NUTRICION ULP");
+        jLabel4.setName(""); // NOI18N
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
+
+        btnAltaPacienteView.setBackground(new java.awt.Color(255, 255, 255));
+        btnAltaPacienteView.setForeground(new java.awt.Color(255, 255, 255));
+        btnAltaPacienteView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/PACIENTES.PNG"))); // NOI18N
+        btnAltaPacienteView.setBorder(null);
+        btnAltaPacienteView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewAltaAlumActionPerformed(evt);
+                btnAltaPacienteViewActionPerformed(evt);
             }
         });
-        jPanel2.add(btnViewAltaAlum, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 220, 70));
+        jPanel2.add(btnAltaPacienteView, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
+
+        btnAltaDietasView.setBackground(new java.awt.Color(255, 255, 255));
+        btnAltaDietasView.setForeground(new java.awt.Color(255, 255, 255));
+        btnAltaDietasView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DIETAS.PNG"))); // NOI18N
+        btnAltaDietasView.setBorder(null);
+        jPanel2.add(btnAltaDietasView, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
+
+        btnAltaComidasView.setBackground(new java.awt.Color(255, 255, 255));
+        btnAltaComidasView.setForeground(new java.awt.Color(255, 255, 255));
+        btnAltaComidasView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/COMIDAS.PNG"))); // NOI18N
+        btnAltaComidasView.setBorder(null);
+        jPanel2.add(btnAltaComidasView, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, 250, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 90));
 
-        Content.setBackground(new java.awt.Color(89, 116, 146));
-        Content.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1280, 630));
+        content.setBackground(new java.awt.Color(89, 116, 146));
+        content.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1280, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnViewAltaAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAltaAlumActionPerformed
-        viewAltaPaciente viewAlta = new viewAltaPaciente();
-        viewAlta.setVisible(true);
-        viewAlta.setLocationRelativeTo(null);
-        this.dispose();      
-    }//GEN-LAST:event_btnViewAltaAlumActionPerformed
+    private void btnAltaPacienteViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaPacienteViewActionPerformed
+        content.removeAll();
+        content.add(vAlta, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }//GEN-LAST:event_btnAltaPacienteViewActionPerformed
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Content;
-    private javax.swing.JButton btnViewAltaAlum;
+    private javax.swing.JButton btnAltaComidasView;
+    private javax.swing.JButton btnAltaDietasView;
+    private javax.swing.JButton btnAltaPacienteView;
+    private javax.swing.JPanel content;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
