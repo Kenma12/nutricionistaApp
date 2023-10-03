@@ -53,27 +53,23 @@ public class PacienteData {
     
     public void bajaPaciente(int idPaciente){
         String sql = "DELETE FROM `paciente` WHERE idPaciente = ?";
-        
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, idPaciente);
             
             int ex = ps.executeUpdate();
-            
+          
             if (ex == 1){
                 JOptionPane.showMessageDialog(null, "Paciente eliminado.");
             }else{
                 JOptionPane.showMessageDialog(null, "El paciente no existe");
             }
-            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());            
         }
-        
-        
-        
-        
     }
+    
+    
     
     
     

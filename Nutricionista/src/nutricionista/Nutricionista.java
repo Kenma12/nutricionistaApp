@@ -21,7 +21,7 @@ public class Nutricionista {
         
         
         
-       pd.bajaPaciente(12);
+       
     }
     
 }
