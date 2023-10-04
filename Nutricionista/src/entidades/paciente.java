@@ -77,6 +77,11 @@ public class Paciente {
     public void setIdPaciente(int idPaciente) {
         this.idPaciente = idPaciente;
     }
+
+    @Override
+    public String toString() {
+        return "Paciente{" + "nombrePaciente=" + nombrePaciente + ", dni=" + dni + ", domicilio=" + domicilio + ", telefono=" + telefono + ", idPaciente=" + idPaciente + '}';
+    }
     
     
     

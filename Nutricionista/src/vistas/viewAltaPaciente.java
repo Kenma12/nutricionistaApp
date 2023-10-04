@@ -4,16 +4,25 @@
  */
 package vistas;
 
+import AccesoADatos.PacienteData;
+import entidades.Paciente;
+import entidades.PacientesServices;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Enzo-PC
  */
 public class viewAltaPaciente extends javax.swing.JPanel {
-    
+    DefaultTableModel modelo = new DefaultTableModel();
+    PacientesServices paciS = new PacientesServices();
+    PacienteData paciD = new PacienteData();
+    ArrayList<Paciente> pacientes = new ArrayList<>();
     /**
      * Creates new form viewAltaPacientes
      */
@@ -23,8 +32,11 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         Border bordeInferior = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK);
         txtNombre.setBorder(bordeInferior);
         txtDni.setBorder(bordeInferior);
-        txtNombre3.setBorder(bordeInferior);
+        txtTel.setBorder(bordeInferior);
         txtDomicilio.setBorder(bordeInferior);
+        armarTabla();
+        cargarTabla();
+        
         
         //Cambiar logos, para los buttons menu.
       //boton.setIcon(new ImageIcon("ruta/a/otra/imagen.png")); 
@@ -48,17 +60,21 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtDomicilio = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtNombre3 = new javax.swing.JTextField();
+        txtTel = new javax.swing.JTextField();
         btnAltaPaciente = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblPacientes = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(89, 116, 146));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Subir nuevo Paciente");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 270, 40));
+        jLabel2.setText("Lista de Pacientes");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 210, 40));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -67,7 +83,7 @@ public class viewAltaPaciente extends javax.swing.JPanel {
 
         txtNombre.setBackground(new java.awt.Color(89, 116, 146));
         txtNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txtNombre.setForeground(new java.awt.Color(89, 116, 146));
+        txtNombre.setForeground(new java.awt.Color(0, 0, 0));
         txtNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,16 +129,16 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         jLabel5.setText("Telefono");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 80, -1));
 
-        txtNombre3.setBackground(new java.awt.Color(89, 116, 146));
-        txtNombre3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txtNombre3.setForeground(new java.awt.Color(0, 0, 0));
-        txtNombre3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtNombre3.addActionListener(new java.awt.event.ActionListener() {
+        txtTel.setBackground(new java.awt.Color(89, 116, 146));
+        txtTel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtTel.setForeground(new java.awt.Color(0, 0, 0));
+        txtTel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtTel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombre3ActionPerformed(evt);
+                txtTelActionPerformed(evt);
             }
         });
-        add(txtNombre3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 260, 40));
+        add(txtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 260, 40));
 
         btnAltaPaciente.setBackground(new java.awt.Color(0, 153, 204));
         btnAltaPaciente.setForeground(new java.awt.Color(0, 0, 0));
@@ -138,6 +154,30 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 2, 10, 630));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Subir nuevo Paciente");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 270, 40));
+
+        tblPacientes.setBackground(new java.awt.Color(0, 153, 153));
+        tblPacientes.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        tblPacientes.setForeground(new java.awt.Color(0, 102, 0));
+        tblPacientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblPacientes);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, -1, 380));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -152,14 +192,68 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDomicilioActionPerformed
 
-    private void txtNombre3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombre3ActionPerformed
+    private void txtTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombre3ActionPerformed
+    }//GEN-LAST:event_txtTelActionPerformed
 
     private void btnAltaPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaPacienteActionPerformed
-        // TODO add your handling code here:
+        //Comprueba si contiene numeros.
+        if (txtNombre.getText().matches(".*\\d.*")){
+            JOptionPane.showMessageDialog(null, "La casilla de NOMBRE no puede contener numeros.");
+            txtNombre.setText("");
+            
+        //Comprueba que solo contenga numeros.
+        }else if (!txtDni.getText().matches("\\d+") && !txtDni.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "La casilla de DNI solo puede contener numeros.");
+            txtDni.setText("");
+        }else if(!txtTel.getText().matches("\\d+") && !txtTel.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "La casilla de TELEFONO solo puede contener numeros.");
+            txtTel.setText("");
+        }else if(txtNombre.getText().equals("") || txtDni.getText().equals("") ||
+                txtTel.getText().equals("") || txtDomicilio.getText().equals("")){
+            
+                JOptionPane.showMessageDialog(null, "No pueden quedar casillas vacias.");
+        }else{
+            String nombre = txtNombre.getText();
+            int dni = Integer.parseInt(txtDni.getText());
+            String tel = txtTel.getText();
+            String domicilio = txtDomicilio.getText();
+            paciS.crearPaciente(nombre, dni, tel, domicilio);
+    
+            txtDni.setText("");
+            txtDomicilio.setText("");
+            txtNombre.setText("");
+            txtTel.setText("");
+            
+            cargarTabla();
+        }      
     }//GEN-LAST:event_btnAltaPacienteActionPerformed
 
+    private void armarTabla(){
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Dni");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Domicilio");
+        tblPacientes.setModel(modelo);
+        tblPacientes.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tblPacientes.getColumnModel().getColumn(1).setPreferredWidth(60);
+        tblPacientes.getColumnModel().getColumn(2).setPreferredWidth(40);
+        tblPacientes.getColumnModel().getColumn(3).setPreferredWidth(60);
+        tblPacientes.getColumnModel().getColumn(4).setPreferredWidth(100);
+    }
+    
+    private void cargarTabla(){
+        pacientes.clear();
+        pacientes.addAll(paciD.listarPacientes());
+        modelo.setRowCount(0);
+        for (Paciente p:pacientes){
+            modelo.addRow(new Object[]{p.getIdPaciente(), p.getNombrePaciente(), p.getDni(), p.getTelefono(), p.getDomicilio()});
+        }
+    }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAltaPaciente;
@@ -168,10 +262,14 @@ public class viewAltaPaciente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable tblPacientes;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtDomicilio;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre3;
+    private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
 }
