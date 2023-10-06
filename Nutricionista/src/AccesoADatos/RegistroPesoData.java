@@ -25,11 +25,9 @@ public class RegistroPesoData {
         conexion = Conexion.getConnection();
     }
     
-    public void nuevoRegistro(RegistroPeso registro){
-        
+    public void nuevoRegistro(RegistroPeso registro){  
         String sql = "INSERT INTO `registro_peso`(`idPaciente`, `peso`)"
                 + " VALUES (?, ?)";
-        
         try{
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
@@ -37,7 +35,6 @@ public class RegistroPesoData {
             ps.setDouble(2, registro.getPeso());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-             
             if (rs.next()){
                 registro.setIdRegistroPeso(rs.getInt(1));
             }

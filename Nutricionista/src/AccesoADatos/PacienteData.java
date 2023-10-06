@@ -162,13 +162,7 @@ public class PacienteData {
             ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-        } 
-        
-        for (Paciente p:pacientes){
-            System.out.println(p.toString());
-        }
-        
-        
+        }     
         return pacientes;
     }
     
@@ -189,7 +183,8 @@ public class PacienteData {
     } 
     
     public void modificarPesoPaciente(Paciente paciente){
-        String sql = "UPDATE `paciente` SET `pesoActual`= ?"
+        String sql = "UPDATE `paciente` "
+                + "SET `pesoActual`= ? ,`pesoDeseado` = ?"
                 + "WHERE idPaciente = ?;";
                
         try {
@@ -202,7 +197,8 @@ public class PacienteData {
             //ejecuta el cambio de peso
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setDouble(1, paciente.getPesoActual());
-            ps.setInt(2, paciente.getIdPaciente());
+            ps.setDouble(2, paciente.getPesoDeseado());
+            ps.setInt(3, paciente.getIdPaciente());
             int ex = ps.executeUpdate();
             if(ex == 1){
                 JOptionPane.showMessageDialog(null, "Peso del Paciente modificado.");

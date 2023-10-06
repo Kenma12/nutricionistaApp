@@ -314,18 +314,26 @@ public class viewAltaPaciente extends javax.swing.JPanel {
 
     private void btnModificarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPActionPerformed
         
-        int id = (int) modelo.getValueAt(tblPacientes.getSelectedRow(), 0);
-        String nombre = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 1);
-        int dni = (int) modelo.getValueAt(tblPacientes.getSelectedRow(), 2);
-        String tel = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 3);
-        String domicilio = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 4);
-        double pesoActual = (double) modelo.getValueAt(tblPacientes.getSelectedRow(), 5);
-        double pesoDeseado = (double) modelo.getValueAt(tblPacientes.getSelectedRow(), 6);
+        if (tblPacientes.getSelectedRow() != -1){
         
-        Paciente p = new Paciente(id, nombre, domicilio, tel, dni, pesoActual, pesoDeseado);
-        
-        paciD.modificarPesoPaciente(p);
-        cargarTabla();
+            int id = (int) modelo.getValueAt(tblPacientes.getSelectedRow(), 0);
+            String nombre = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 1);
+            int dni = (int) modelo.getValueAt(tblPacientes.getSelectedRow(), 2);
+            String tel = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 3);
+            String domicilio = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 4);
+            
+            if (esNumero((String) modelo.getValueAt(tblPacientes.getSelectedRow(), 5)) && esNumero((String) modelo.getValueAt(tblPacientes.getSelectedRow(), 6))){
+                double pesoActual = Double.parseDouble((String) modelo.getValueAt(tblPacientes.getSelectedRow(), 5));
+                double pesoDeseado = Double.parseDouble((String) modelo.getValueAt(tblPacientes.getSelectedRow(), 6));
+                Paciente p = new Paciente(id, nombre, domicilio, tel, dni, pesoActual, pesoDeseado);
+                paciD.modificarPesoPaciente(p);
+                cargarTabla();
+            }else{
+               JOptionPane.showMessageDialog(null, "Solo se permite ingreso de numeros.");
+            }     
+        }else{
+            JOptionPane.showMessageDialog(null, "Tiene que seleccionar una fila");
+        }
     }//GEN-LAST:event_btnModificarPActionPerformed
 
     public static boolean esNumero(String texto) {
@@ -334,10 +342,6 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         Matcher matcher = pattern.matcher(texto);
         return matcher.matches();
     }
-    
-    
-    
-    
     private void armarTabla(){
         modelo.addColumn("Id");
         modelo.addColumn("Nombre");
@@ -361,7 +365,7 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         pacientes.addAll(paciD.listarPacientes());
         modelo.setRowCount(0);
         for (Paciente p:pacientes){
-            modelo.addRow(new Object[]{p.getIdPaciente(), p.getNombrePaciente(), p.getDni(), p.getTelefono(), p.getDomicilio(), p.getPesoActual() + "kg", p.getPesoDeseado() + "kg"});
+            modelo.addRow(new Object[]{p.getIdPaciente(), p.getNombrePaciente(), p.getDni(), p.getTelefono(), p.getDomicilio(), p.getPesoActual(), p.getPesoDeseado()});
         }
     }
     
