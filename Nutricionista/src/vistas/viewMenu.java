@@ -13,12 +13,15 @@ import javax.swing.ImageIcon;
  * @author Enzo-PC
  */
 public class viewMenu extends javax.swing.JFrame {
+    
     viewAltaPaciente vAlta = new viewAltaPaciente();
     viewAltaDieta vDieta = new viewAltaDieta();
     viewAltaComida vComida = new viewAltaComida();
+    
     /**
      * Creates new form viewMenu
      */
+    
     public viewMenu() {
         initComponents();
         vAlta.setSize(500, 300);
@@ -119,7 +122,6 @@ public class viewMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAltaPacienteViewActionPerformed
 
     private void btnAltaPacienteViewMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAltaPacienteViewMouseEntered
-        // 597492
         btnAltaPacienteView.setBackground(new Color(102,174,192));
     }//GEN-LAST:event_btnAltaPacienteViewMouseEntered
 
@@ -141,6 +143,9 @@ public class viewMenu extends javax.swing.JFrame {
         content.repaint();
     }//GEN-LAST:event_btnAltaComidasActionPerformed
 
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAltaComidas;
     private javax.swing.JButton btnAltaDietasView;

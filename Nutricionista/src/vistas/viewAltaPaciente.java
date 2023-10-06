@@ -23,7 +23,15 @@ import javax.swing.table.DefaultTableModel;
 
 public class viewAltaPaciente extends javax.swing.JPanel {
     
-    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if (column == 5 || column == 6){
+                return true;
+            }     
+            return false;
+        }   
+    };
     PacientesServices paciS = new PacientesServices();
     PacienteData paciD = new PacienteData();
     ArrayList<Paciente> pacientes = new ArrayList<>();
@@ -78,6 +86,8 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         txtPesoA = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtPesoD = new javax.swing.JTextField();
+        btnModificarP = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(89, 116, 146));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -142,14 +152,14 @@ public class viewAltaPaciente extends javax.swing.JPanel {
 
         btnAltaPaciente.setBackground(new java.awt.Color(0, 153, 204));
         btnAltaPaciente.setForeground(new java.awt.Color(0, 0, 0));
-        btnAltaPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Group 1.png"))); // NOI18N
+        btnAltaPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Subir Button.png"))); // NOI18N
         btnAltaPaciente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAltaPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAltaPacienteActionPerformed(evt);
             }
         });
-        add(btnAltaPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 520, 180, 70));
+        add(btnAltaPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 110, 60));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -221,6 +231,17 @@ public class viewAltaPaciente extends javax.swing.JPanel {
             }
         });
         add(txtPesoD, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 260, 40));
+
+        btnModificarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Modificar Peso button.png"))); // NOI18N
+        btnModificarP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarPActionPerformed(evt);
+            }
+        });
+        add(btnModificarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 520, 250, 60));
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Eliminar Paciente button.png"))); // NOI18N
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 520, 290, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -291,12 +312,30 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesoDActionPerformed
 
+    private void btnModificarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPActionPerformed
+        
+        int id = (int) modelo.getValueAt(tblPacientes.getSelectedRow(), 0);
+        String nombre = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 1);
+        int dni = (int) modelo.getValueAt(tblPacientes.getSelectedRow(), 2);
+        String tel = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 3);
+        String domicilio = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 4);
+        double pesoActual = (double) modelo.getValueAt(tblPacientes.getSelectedRow(), 5);
+        double pesoDeseado = (double) modelo.getValueAt(tblPacientes.getSelectedRow(), 6);
+        
+        Paciente p = new Paciente(id, nombre, domicilio, tel, dni, pesoActual, pesoDeseado);
+        
+        paciD.modificarPesoPaciente(p);
+        cargarTabla();
+    }//GEN-LAST:event_btnModificarPActionPerformed
+
     public static boolean esNumero(String texto) {
         String patron = "^\\d+(\\.\\d+)?$"; // Expresión regular para números enteros o decimales
         Pattern pattern = Pattern.compile(patron);
         Matcher matcher = pattern.matcher(texto);
         return matcher.matches();
     }
+    
+    
     
     
     private void armarTabla(){
@@ -331,6 +370,8 @@ public class viewAltaPaciente extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAltaPaciente;
+    private javax.swing.JButton btnModificarP;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
