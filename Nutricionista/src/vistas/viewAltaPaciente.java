@@ -9,6 +9,8 @@ import entidades.Paciente;
 import entidades.PacientesServices;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
@@ -18,7 +20,9 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Enzo-PC
  */
+
 public class viewAltaPaciente extends javax.swing.JPanel {
+    
     DefaultTableModel modelo = new DefaultTableModel();
     PacientesServices paciS = new PacientesServices();
     PacienteData paciD = new PacienteData();
@@ -29,11 +33,14 @@ public class viewAltaPaciente extends javax.swing.JPanel {
     public viewAltaPaciente() {
         initComponents();
         this.setSize(1280, 630);
+        
         Border bordeInferior = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK);
         txtNombre.setBorder(bordeInferior);
         txtDni.setBorder(bordeInferior);
         txtTel.setBorder(bordeInferior);
         txtDomicilio.setBorder(bordeInferior);
+        txtPesoA.setBorder(bordeInferior);
+        txtPesoD.setBorder(bordeInferior);
         armarTabla();
         cargarTabla();
         
@@ -56,7 +63,6 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtDni = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtDomicilio = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -67,6 +73,11 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPacientes = new javax.swing.JTable();
+        txtDni = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtPesoA = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtPesoD = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(89, 116, 146));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -74,12 +85,12 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Lista de Pacientes");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 210, 40));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 210, 40));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nombre");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         txtNombre.setBackground(new java.awt.Color(89, 116, 146));
         txtNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -90,28 +101,17 @@ public class viewAltaPaciente extends javax.swing.JPanel {
                 txtNombreActionPerformed(evt);
             }
         });
-        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 260, 40));
+        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 260, 40));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("DNI");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
-
-        txtDni.setBackground(new java.awt.Color(89, 116, 146));
-        txtDni.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txtDni.setForeground(new java.awt.Color(0, 0, 0));
-        txtDni.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtDni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDniActionPerformed(evt);
-            }
-        });
-        add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 260, 40));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Domicilio");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 100, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 100, -1));
 
         txtDomicilio.setBackground(new java.awt.Color(89, 116, 146));
         txtDomicilio.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -122,12 +122,12 @@ public class viewAltaPaciente extends javax.swing.JPanel {
                 txtDomicilioActionPerformed(evt);
             }
         });
-        add(txtDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 260, 40));
+        add(txtDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, 260, 40));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Telefono");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 80, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 80, -1));
 
         txtTel.setBackground(new java.awt.Color(89, 116, 146));
         txtTel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -138,7 +138,7 @@ public class viewAltaPaciente extends javax.swing.JPanel {
                 txtTelActionPerformed(evt);
             }
         });
-        add(txtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 260, 40));
+        add(txtTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, 260, 40));
 
         btnAltaPaciente.setBackground(new java.awt.Color(0, 153, 204));
         btnAltaPaciente.setForeground(new java.awt.Color(0, 0, 0));
@@ -149,19 +149,19 @@ public class viewAltaPaciente extends javax.swing.JPanel {
                 btnAltaPacienteActionPerformed(evt);
             }
         });
-        add(btnAltaPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, 180, 70));
+        add(btnAltaPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 520, 180, 70));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 2, 10, 630));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(626, 2, -1, 630));
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Subir nuevo Paciente");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 270, 40));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 270, 40));
 
-        tblPacientes.setBackground(new java.awt.Color(0, 153, 153));
+        tblPacientes.setBackground(new java.awt.Color(134, 176, 215));
         tblPacientes.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         tblPacientes.setForeground(new java.awt.Color(0, 102, 0));
         tblPacientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -177,16 +177,55 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblPacientes);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, -1, 380));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 70, 600, 400));
+
+        txtDni.setBackground(new java.awt.Color(89, 116, 146));
+        txtDni.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtDni.setForeground(new java.awt.Color(0, 0, 0));
+        txtDni.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDniActionPerformed(evt);
+            }
+        });
+        add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 260, 40));
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Peso actual");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
+
+        txtPesoA.setBackground(new java.awt.Color(89, 116, 146));
+        txtPesoA.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtPesoA.setForeground(new java.awt.Color(0, 0, 0));
+        txtPesoA.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtPesoA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesoAActionPerformed(evt);
+            }
+        });
+        add(txtPesoA, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 260, 40));
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Peso deseado");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, -1, -1));
+
+        txtPesoD.setBackground(new java.awt.Color(89, 116, 146));
+        txtPesoD.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtPesoD.setForeground(new java.awt.Color(0, 0, 0));
+        txtPesoD.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtPesoD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPesoDActionPerformed(evt);
+            }
+        });
+        add(txtPesoD, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 260, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDniActionPerformed
 
     private void txtDomicilioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDomicilioActionPerformed
         // TODO add your handling code here:
@@ -209,38 +248,73 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         }else if(!txtTel.getText().matches("\\d+") && !txtTel.getText().equals("")){
             JOptionPane.showMessageDialog(null, "La casilla de TELEFONO solo puede contener numeros.");
             txtTel.setText("");
+        }else if(!esNumero(txtPesoA.getText()) && !txtPesoA.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "La casilla de PESO ACTUAL solo puede contener numeros.");
+            txtPesoA.setText("");
+        }else if(!esNumero(txtPesoD.getText()) && !txtPesoD.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "La casilla de PESO DESEADO solo puede contener numeros.");
+            txtPesoD.setText("");
         }else if(txtNombre.getText().equals("") || txtDni.getText().equals("") ||
-                txtTel.getText().equals("") || txtDomicilio.getText().equals("")){
-            
+                txtTel.getText().equals("") || txtDomicilio.getText().equals("")
+                || txtPesoA.getText().equals("") || txtPesoD.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "No pueden quedar casillas vacias.");
         }else{
             String nombre = txtNombre.getText();
             int dni = Integer.parseInt(txtDni.getText());
             String tel = txtTel.getText();
             String domicilio = txtDomicilio.getText();
-            paciS.crearPaciente(nombre, dni, tel, domicilio);
+            double pesoActual = Double.parseDouble(txtPesoA.getText());
+            double pesoDeseado = Double.parseDouble(txtPesoD.getText());
+            
+            paciS.crearPaciente(nombre, dni, tel, domicilio, pesoActual, pesoDeseado);
     
             txtDni.setText("");
             txtDomicilio.setText("");
             txtNombre.setText("");
             txtTel.setText("");
+            txtPesoA.setText("");
+            txtPesoD.setText("");
             
             cargarTabla();
-        }      
+        }   
     }//GEN-LAST:event_btnAltaPacienteActionPerformed
 
+    private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDniActionPerformed
+
+    private void txtPesoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesoAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesoAActionPerformed
+
+    private void txtPesoDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesoDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPesoDActionPerformed
+
+    public static boolean esNumero(String texto) {
+        String patron = "^\\d+(\\.\\d+)?$"; // Expresión regular para números enteros o decimales
+        Pattern pattern = Pattern.compile(patron);
+        Matcher matcher = pattern.matcher(texto);
+        return matcher.matches();
+    }
+    
+    
     private void armarTabla(){
         modelo.addColumn("Id");
         modelo.addColumn("Nombre");
         modelo.addColumn("Dni");
         modelo.addColumn("Telefono");
         modelo.addColumn("Domicilio");
+        modelo.addColumn("Peso actual");
+        modelo.addColumn("Peso deseado");
         tblPacientes.setModel(modelo);
         tblPacientes.getColumnModel().getColumn(0).setPreferredWidth(10);
         tblPacientes.getColumnModel().getColumn(1).setPreferredWidth(60);
         tblPacientes.getColumnModel().getColumn(2).setPreferredWidth(40);
-        tblPacientes.getColumnModel().getColumn(3).setPreferredWidth(60);
-        tblPacientes.getColumnModel().getColumn(4).setPreferredWidth(100);
+        tblPacientes.getColumnModel().getColumn(3).setPreferredWidth(40);
+        tblPacientes.getColumnModel().getColumn(4).setPreferredWidth(60);
+        tblPacientes.getColumnModel().getColumn(5).setPreferredWidth(30);
+        tblPacientes.getColumnModel().getColumn(6).setPreferredWidth(30);
     }
     
     private void cargarTabla(){
@@ -248,7 +322,7 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         pacientes.addAll(paciD.listarPacientes());
         modelo.setRowCount(0);
         for (Paciente p:pacientes){
-            modelo.addRow(new Object[]{p.getIdPaciente(), p.getNombrePaciente(), p.getDni(), p.getTelefono(), p.getDomicilio()});
+            modelo.addRow(new Object[]{p.getIdPaciente(), p.getNombrePaciente(), p.getDni(), p.getTelefono(), p.getDomicilio(), p.getPesoActual() + "kg", p.getPesoDeseado() + "kg"});
         }
     }
     
@@ -264,12 +338,16 @@ public class viewAltaPaciente extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tblPacientes;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtDomicilio;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPesoA;
+    private javax.swing.JTextField txtPesoD;
     private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
 }

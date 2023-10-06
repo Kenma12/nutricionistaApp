@@ -6,7 +6,8 @@ package vistas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-
+import java.awt.Image;
+import javax.swing.ImageIcon;
 /**
  *
  * @author Enzo-PC
@@ -18,10 +19,8 @@ public class viewMenu extends javax.swing.JFrame {
      */
     public viewMenu() {
         initComponents();
-      
         vAlta.setSize(500, 300);
         vAlta.setLocation(0, 0);
-        
     }
 
     /**
@@ -41,18 +40,29 @@ public class viewMenu extends javax.swing.JFrame {
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("NUTRICION ULP");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnAltaPacienteView.setBackground(new java.awt.Color(0, 255, 204));
-        btnAltaPacienteView.setForeground(new java.awt.Color(255, 255, 255));
-        btnAltaPacienteView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/PACIENTES.PNG"))); // NOI18N
+        btnAltaPacienteView.setBackground(new java.awt.Color(255, 255, 255));
+        btnAltaPacienteView.setFont(new java.awt.Font("Frank Ruhl Hofshi", 0, 36)); // NOI18N
+        btnAltaPacienteView.setForeground(new java.awt.Color(89, 116, 146));
+        btnAltaPacienteView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Avatar.png"))); // NOI18N
+        btnAltaPacienteView.setText("PACIENTES");
         btnAltaPacienteView.setBorder(null);
+        btnAltaPacienteView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAltaPacienteViewMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAltaPacienteViewMouseExited(evt);
+            }
+        });
         btnAltaPacienteView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAltaPacienteViewActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAltaPacienteView, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
+        getContentPane().add(btnAltaPacienteView, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 10, 290, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -91,6 +101,15 @@ public class viewMenu extends javax.swing.JFrame {
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_btnAltaPacienteViewActionPerformed
+
+    private void btnAltaPacienteViewMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAltaPacienteViewMouseEntered
+        // 597492
+        btnAltaPacienteView.setBackground(new Color(102,174,192));
+    }//GEN-LAST:event_btnAltaPacienteViewMouseEntered
+
+    private void btnAltaPacienteViewMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAltaPacienteViewMouseExited
+        btnAltaPacienteView.setBackground(Color.white);
+    }//GEN-LAST:event_btnAltaPacienteViewMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAltaComidasView;

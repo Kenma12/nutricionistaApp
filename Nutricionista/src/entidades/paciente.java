@@ -15,26 +15,32 @@ public class Paciente {
     private String domicilio;
     private String telefono;
     private int idPaciente;
+    private double pesoActual;
+    private double pesoDeseado;
 
     public Paciente(){}
     
     //CONSTRUCTOR CON ID
     
-    public Paciente(int idPaciente, String nombrePaciente, String domicilio, String telefono, int dni){
+    public Paciente(int idPaciente, String nombrePaciente, String domicilio, String telefono, int dni, double pesoActual, double pesoDeseado){
         this.idPaciente = idPaciente;
         this.nombrePaciente = nombrePaciente;
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.dni = dni;
+        this.pesoActual = pesoActual;
+        this.pesoDeseado = pesoDeseado;
     }
     
     //CONSTRUCTOR SIN ID
     
-    public Paciente(String nombrePaciente, String domicilio, String telefono, int dni){
+    public Paciente(String nombrePaciente, String domicilio, String telefono, int dni, double pesoActual, double pesoDeseado){
         this.nombrePaciente = nombrePaciente;
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.dni = dni;
+        this.pesoActual = pesoActual;
+        this.pesoDeseado = pesoDeseado;
     }
     
     
@@ -77,7 +83,23 @@ public class Paciente {
     public void setIdPaciente(int idPaciente) {
         this.idPaciente = idPaciente;
     }
+    
+    public double getPesoActual() {
+        return pesoActual;
+    }
 
+    public void setPesoActual(double pesoActual) {
+        this.pesoActual = pesoActual;
+    }
+
+    public double getPesoDeseado() {
+        return pesoDeseado;
+    }
+
+    public void setPesoDeseado(double pesoDeseado) {
+        this.pesoDeseado = pesoDeseado;
+    }
+    
     @Override
     public String toString() {
         return "Paciente{" + "nombrePaciente=" + nombrePaciente + ", dni=" + dni + ", domicilio=" + domicilio + ", telefono=" + telefono + ", idPaciente=" + idPaciente + '}';

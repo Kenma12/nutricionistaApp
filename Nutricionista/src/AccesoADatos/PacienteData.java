@@ -5,6 +5,7 @@
 package AccesoADatos;
 
 import entidades.Paciente;
+import entidades.RegistroPeso;
 import org.mariadb.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -26,8 +27,8 @@ public class PacienteData {
     }
  
     public void altaPaciente(Paciente paciente){
-        String sql = "INSERT INTO `paciente`(`nombrePaciente`, `dni`, `domicilio`, `telefono`) "
-                    + "VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO `paciente`(`nombrePaciente`, `dni`, `domicilio`, `telefono`, `pesoActual`, `pesoDeseado`) "
+                    + "VALUES (?, ?, ?, ?, ?, ?)";
     
         try {  
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -36,6 +37,8 @@ public class PacienteData {
             ps.setInt(2, paciente.getDni());
             ps.setString(3, paciente.getDomicilio());
             ps.setString(4, paciente.getTelefono());
+            ps.setDouble(5, paciente.getPesoActual());
+            ps.setDouble(6, paciente.getPesoDeseado());
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys(); 
@@ -72,7 +75,7 @@ public class PacienteData {
     
     public Paciente buscarPacienteXId(int id){
         
-        String sql = "SELECT `nombrePaciente`, `dni`, `domicilio`, `telefono` "
+        String sql = "SELECT `nombrePaciente`, `dni`, `domicilio`, `telefono`, `pesoActual`, `pesoDeseado`"
                 + "FROM `paciente` WHERE idPaciente = ?";
         
         Paciente paci = null;
@@ -90,6 +93,8 @@ public class PacienteData {
                 paci.setDomicilio(rs.getString("domicilio"));
                 paci.setNombrePaciente(rs.getString("nombrePaciente"));
                 paci.setTelefono(rs.getString("telefono"));
+                paci.setPesoActual(rs.getDouble("pesoActual"));
+                paci.setPesoDeseado(rs.getDouble("pesoDeseado"));
             }else{
                 JOptionPane.showMessageDialog(null, "No existe el paciente buscado");
             }
@@ -102,8 +107,8 @@ public class PacienteData {
     
     public Paciente buscarPacienteXDni(int dni){
         
-        String sql = "SELECT `idPaciente`, `nombrePaciente`, `dni`, `domicilio`, `telefono` "
-                + "FROM `paciente` WHERE dni = ?;";
+        String sql = "SELECT `nombrePaciente`, `dni`, `domicilio`, `telefono`, `pesoActual`, `pesoDeseado`"
+                + "FROM `paciente` WHERE idPaciente = ?";
         
         Paciente paci = null;
         try{ 
@@ -117,6 +122,8 @@ public class PacienteData {
                 paci.setDni(rs.getInt("dni"));
                 paci.setDomicilio(rs.getString("domicilio"));
                 paci.setTelefono(rs.getString("telefono"));
+                paci.setPesoActual(rs.getDouble("pesoActual"));
+                paci.setPesoDeseado(rs.getDouble("pesoDeseado"));
             }else{
                 JOptionPane.showMessageDialog(null, "No existe el paciente buscado");
             }
@@ -124,6 +131,7 @@ public class PacienteData {
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
+        System.out.println(paci.toString());
         return paci;
     }
     
@@ -131,7 +139,7 @@ public class PacienteData {
     
         ArrayList<Paciente> pacientes = new ArrayList();
         
-        String sql = "SELECT `idPaciente`, `nombrePaciente`, `dni`, `domicilio`, `telefono` "
+        String sql = "SELECT `idPaciente`, `nombrePaciente`, `dni`, `domicilio`, `telefono`, `pesoActual`, `pesoDeseado` "
                 + "FROM `paciente`";
         Paciente paci =null;
         try{
@@ -146,6 +154,8 @@ public class PacienteData {
                 paci.setDni(rs.getInt("dni"));
                 paci.setDomicilio(rs.getString("domicilio"));
                 paci.setTelefono(rs.getString("telefono"));
+                paci.setPesoActual(rs.getDouble("pesoActual"));
+                paci.setPesoDeseado(rs.getDouble("pesoDeseado"));
                 pacientes.add(paci);
             }
             rs.close();
@@ -177,10 +187,30 @@ public class PacienteData {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
     } 
-        
     
-    
-    
+    public void modificarPesoPaciente(Paciente paciente){
+        String sql = "UPDATE `paciente` SET `pesoActual`= ?"
+                + "WHERE idPaciente = ?;";
+               
+        try {
+            //Guarda su peso anterior en un registroPeso
+            Paciente aux = buscarPacienteXId(paciente.getIdPaciente());
+            RegistroPeso registro = new RegistroPeso(aux, aux.getPesoActual()); 
+            RegistroPesoData registroData = new RegistroPesoData();
+            registroData.nuevoRegistro(registro);
+            
+            //ejecuta el cambio de peso
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setDouble(1, paciente.getPesoActual());
+            ps.setInt(2, paciente.getIdPaciente());
+            int ex = ps.executeUpdate();
+            if(ex == 1){
+                JOptionPane.showMessageDialog(null, "Peso del Paciente modificado.");
+            }
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }
+    } 
     
     
     

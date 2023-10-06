@@ -14,8 +14,8 @@ public class PacientesServices {
     public PacientesServices(){}
     private PacienteData data = new PacienteData();
     
-    public void crearPaciente(String nombre, int dni, String telefono, String domicilio){
-        Paciente paci = new Paciente(nombre, domicilio, telefono, dni);
+    public void crearPaciente(String nombre, int dni, String telefono, String domicilio, double pesoActual, double pesoDeseado){
+        Paciente paci = new Paciente(nombre, domicilio, telefono, dni, pesoActual, pesoDeseado);
         data.altaPaciente(paci);
     }
     
