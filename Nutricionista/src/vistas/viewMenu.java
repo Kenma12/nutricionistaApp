@@ -14,6 +14,8 @@ import javax.swing.ImageIcon;
  */
 public class viewMenu extends javax.swing.JFrame {
     viewAltaPaciente vAlta = new viewAltaPaciente();
+    viewAltaDieta vDieta = new viewAltaDieta();
+    viewAltaComida vComida = new viewAltaComida();
     /**
      * Creates new form viewMenu
      */
@@ -21,6 +23,10 @@ public class viewMenu extends javax.swing.JFrame {
         initComponents();
         vAlta.setSize(500, 300);
         vAlta.setLocation(0, 0);
+        vDieta.setSize(500, 300);
+        vDieta.setLocation(0, 0);
+        vComida.setSize(500, 300);
+        vComida.setLocation(0, 0);
     }
 
     /**
@@ -36,7 +42,7 @@ public class viewMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         btnAltaDietasView = new javax.swing.JButton();
-        btnAltaComidasView = new javax.swing.JButton();
+        btnAltaComidas = new javax.swing.JButton();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,13 +84,23 @@ public class viewMenu extends javax.swing.JFrame {
         btnAltaDietasView.setForeground(new java.awt.Color(255, 255, 255));
         btnAltaDietasView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DIETAS.PNG"))); // NOI18N
         btnAltaDietasView.setBorder(null);
+        btnAltaDietasView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaDietasViewActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnAltaDietasView, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
 
-        btnAltaComidasView.setBackground(new java.awt.Color(255, 255, 255));
-        btnAltaComidasView.setForeground(new java.awt.Color(255, 255, 255));
-        btnAltaComidasView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/COMIDAS.PNG"))); // NOI18N
-        btnAltaComidasView.setBorder(null);
-        jPanel2.add(btnAltaComidasView, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, 250, 50));
+        btnAltaComidas.setBackground(new java.awt.Color(255, 255, 255));
+        btnAltaComidas.setForeground(new java.awt.Color(255, 255, 255));
+        btnAltaComidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/COMIDAS.PNG"))); // NOI18N
+        btnAltaComidas.setBorder(null);
+        btnAltaComidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaComidasActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnAltaComidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, 250, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 90));
 
@@ -111,8 +127,22 @@ public class viewMenu extends javax.swing.JFrame {
         btnAltaPacienteView.setBackground(Color.white);
     }//GEN-LAST:event_btnAltaPacienteViewMouseExited
 
+    private void btnAltaDietasViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaDietasViewActionPerformed
+        content.removeAll();
+        content.add(vDieta, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }//GEN-LAST:event_btnAltaDietasViewActionPerformed
+
+    private void btnAltaComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaComidasActionPerformed
+        content.removeAll();
+        content.add(vComida, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+    }//GEN-LAST:event_btnAltaComidasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAltaComidasView;
+    private javax.swing.JButton btnAltaComidas;
     private javax.swing.JButton btnAltaDietasView;
     private javax.swing.JButton btnAltaPacienteView;
     private javax.swing.JPanel content;
