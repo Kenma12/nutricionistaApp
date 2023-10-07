@@ -46,7 +46,9 @@ public class viewMenu extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnAltaDietasView = new javax.swing.JButton();
         btnAltaComidas = new javax.swing.JButton();
+        btnAltaComidas1 = new javax.swing.JButton();
         content = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("NUTRICION ULP");
@@ -71,7 +73,7 @@ public class viewMenu extends javax.swing.JFrame {
                 btnAltaPacienteViewActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAltaPacienteView, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 10, 290, -1));
+        getContentPane().add(btnAltaPacienteView, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 10, 290, 80));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -81,7 +83,7 @@ public class viewMenu extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(89, 116, 146));
         jLabel4.setText(" NUTRICION ULP");
         jLabel4.setName(""); // NOI18N
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 0, 160, 30));
 
         btnAltaDietasView.setBackground(new java.awt.Color(255, 255, 255));
         btnAltaDietasView.setForeground(new java.awt.Color(255, 255, 255));
@@ -92,23 +94,38 @@ public class viewMenu extends javax.swing.JFrame {
                 btnAltaDietasViewActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAltaDietasView, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, -1));
+        jPanel2.add(btnAltaDietasView, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
 
         btnAltaComidas.setBackground(new java.awt.Color(255, 255, 255));
         btnAltaComidas.setForeground(new java.awt.Color(255, 255, 255));
-        btnAltaComidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/COMIDAS.PNG"))); // NOI18N
+        btnAltaComidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Home button.png"))); // NOI18N
         btnAltaComidas.setBorder(null);
         btnAltaComidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAltaComidasActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAltaComidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, 250, 50));
+        jPanel2.add(btnAltaComidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 60, 70));
+
+        btnAltaComidas1.setBackground(new java.awt.Color(255, 255, 255));
+        btnAltaComidas1.setForeground(new java.awt.Color(255, 255, 255));
+        btnAltaComidas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/COMIDAS.PNG"))); // NOI18N
+        btnAltaComidas1.setBorder(null);
+        btnAltaComidas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaComidas1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnAltaComidas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 250, 50));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 90));
 
         content.setBackground(new java.awt.Color(89, 116, 146));
         content.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo Menu.jpg"))); // NOI18N
+        content.add(jLabel1, java.awt.BorderLayout.CENTER);
+
         getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1280, 630));
 
         pack();
@@ -143,14 +160,20 @@ public class viewMenu extends javax.swing.JFrame {
         content.repaint();
     }//GEN-LAST:event_btnAltaComidasActionPerformed
 
+    private void btnAltaComidas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaComidas1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAltaComidas1ActionPerformed
+
     
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAltaComidas;
+    private javax.swing.JButton btnAltaComidas1;
     private javax.swing.JButton btnAltaDietasView;
     private javax.swing.JButton btnAltaPacienteView;
     private javax.swing.JPanel content;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
