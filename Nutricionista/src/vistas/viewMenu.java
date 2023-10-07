@@ -18,6 +18,7 @@ public class viewMenu extends javax.swing.JFrame {
     viewAltaDieta vDieta = new viewAltaDieta();
     viewAltaComida vComida = new viewAltaComida();
     
+    
     /**
      * Creates new form viewMenu
      */
@@ -45,7 +46,7 @@ public class viewMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         btnAltaDietasView = new javax.swing.JButton();
-        btnAltaComidas = new javax.swing.JButton();
+        btnHomeView = new javax.swing.JButton();
         btnAltaComidas1 = new javax.swing.JButton();
         content = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -96,16 +97,16 @@ public class viewMenu extends javax.swing.JFrame {
         });
         jPanel2.add(btnAltaDietasView, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
 
-        btnAltaComidas.setBackground(new java.awt.Color(255, 255, 255));
-        btnAltaComidas.setForeground(new java.awt.Color(255, 255, 255));
-        btnAltaComidas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Home button.png"))); // NOI18N
-        btnAltaComidas.setBorder(null);
-        btnAltaComidas.addActionListener(new java.awt.event.ActionListener() {
+        btnHomeView.setBackground(new java.awt.Color(255, 255, 255));
+        btnHomeView.setForeground(new java.awt.Color(255, 255, 255));
+        btnHomeView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Home button.png"))); // NOI18N
+        btnHomeView.setBorder(null);
+        btnHomeView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAltaComidasActionPerformed(evt);
+                btnHomeViewActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAltaComidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 60, 70));
+        jPanel2.add(btnHomeView, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 60, 70));
 
         btnAltaComidas1.setBackground(new java.awt.Color(255, 255, 255));
         btnAltaComidas1.setForeground(new java.awt.Color(255, 255, 255));
@@ -153,12 +154,12 @@ public class viewMenu extends javax.swing.JFrame {
         content.repaint();
     }//GEN-LAST:event_btnAltaDietasViewActionPerformed
 
-    private void btnAltaComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaComidasActionPerformed
+    private void btnHomeViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeViewActionPerformed
         content.removeAll();
-        content.add(vComida, BorderLayout.CENTER);
+     //   content.add(content, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
-    }//GEN-LAST:event_btnAltaComidasActionPerformed
+    }//GEN-LAST:event_btnHomeViewActionPerformed
 
     private void btnAltaComidas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaComidas1ActionPerformed
         // TODO add your handling code here:
@@ -168,10 +169,10 @@ public class viewMenu extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAltaComidas;
     private javax.swing.JButton btnAltaComidas1;
     private javax.swing.JButton btnAltaDietasView;
     private javax.swing.JButton btnAltaPacienteView;
+    private javax.swing.JButton btnHomeView;
     private javax.swing.JPanel content;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
