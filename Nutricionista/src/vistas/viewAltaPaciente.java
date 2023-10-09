@@ -15,6 +15,8 @@ import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -51,12 +53,11 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         txtDomicilio.setBorder(bordeInferior);
         txtPesoA.setBorder(bordeInferior);
         txtPesoD.setBorder(bordeInferior);
+        btnRegistro.setEnabled(false);
         armarTabla();
         cargarTabla();
+        habilitarButton();
         
-        
-        //Cambiar logos, para los buttons menu.
-      //boton.setIcon(new ImageIcon("ruta/a/otra/imagen.png")); 
         
     }
 
@@ -250,7 +251,18 @@ public class viewAltaPaciente extends javax.swing.JPanel {
             }
         });
         add(btnEliminarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 520, 290, 60));
-        add(btnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 520, 70, 60));
+
+        btnRegistro.setBackground(new java.awt.Color(89, 116, 146));
+        btnRegistro.setForeground(new java.awt.Color(89, 116, 146));
+        btnRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/checklist.png"))); // NOI18N
+        btnRegistro.setBorder(null);
+        btnRegistro.setBorderPainted(false);
+        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistroActionPerformed(evt);
+            }
+        });
+        add(btnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 510, 70, 80));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -370,19 +382,16 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEliminarPacienteActionPerformed
 
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistroActionPerformed
+
     public static boolean esNumero(String texto) {
         String patron = "^\\d+(\\.\\d+)?$"; // Expresión regular para números enteros o decimales
         Pattern pattern = Pattern.compile(patron);
         Matcher matcher = pattern.matcher(texto);
         return matcher.matches();
     }
-    
-//    public static boolean esNumero(String texto){
-//        String patron = "^\\d+(\\.\\d+)?$"; // Expresión regular para números enteros o decimales
-//        Pattern pattern = Pattern.compile(patron);
-//        Matcher matcher = pattern.matcher(texto);
-//        return matcher.matches();
-//    }
     
     private void armarTabla(){
         modelo.addColumn("Id");
@@ -409,6 +418,24 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         for (Paciente p:pacientes){
             modelo.addRow(new Object[]{p.getIdPaciente(), p.getNombrePaciente(), p.getDni(), p.getTelefono(), p.getDomicilio(), p.getPesoActual(), p.getPesoDeseado()});
         }
+    }
+    
+    private void habilitarButton(){
+        tblPacientes.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    if(!e.getValueIsAdjusting()) {
+                        int selectedRow = tblPacientes.getSelectedRow();
+
+                        if(selectedRow != -1) {
+                            btnRegistro.setEnabled(true);
+                        }else {
+                            btnRegistro.setEnabled(false);
+                        }
+                    }
+                }
+        });
+        
     }
     
     
