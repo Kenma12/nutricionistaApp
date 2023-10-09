@@ -46,11 +46,18 @@ public class RegistroPesoData {
         }
     }
     
-    public void eliminarRegistros(Paciente paciente){
+    public void eliminarRegistros(int id){
         
+        String sql = "DELETE FROM `registro_peso` WHERE idPaciente = ?";
         
-        
-        
+        try{
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }  
     }
     
     

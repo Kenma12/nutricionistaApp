@@ -6,8 +6,6 @@ package vistas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Image;
-import javax.swing.ImageIcon;
 /**
  *
  * @author Enzo-PC
@@ -49,6 +47,7 @@ public class viewMenu extends javax.swing.JFrame {
         btnHomeView = new javax.swing.JButton();
         btnAltaComidas1 = new javax.swing.JButton();
         content = new javax.swing.JPanel();
+        JpanelMenu = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -87,15 +86,25 @@ public class viewMenu extends javax.swing.JFrame {
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 0, 160, 30));
 
         btnAltaDietasView.setBackground(new java.awt.Color(255, 255, 255));
-        btnAltaDietasView.setForeground(new java.awt.Color(255, 255, 255));
-        btnAltaDietasView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DIETAS.PNG"))); // NOI18N
+        btnAltaDietasView.setFont(new java.awt.Font("Frank Ruhl Hofshi", 0, 36)); // NOI18N
+        btnAltaDietasView.setForeground(new java.awt.Color(89, 116, 146));
+        btnAltaDietasView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/dieta_logo.png"))); // NOI18N
+        btnAltaDietasView.setText("DIETAS");
         btnAltaDietasView.setBorder(null);
+        btnAltaDietasView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAltaDietasViewMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAltaDietasViewMouseExited(evt);
+            }
+        });
         btnAltaDietasView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAltaDietasViewActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAltaDietasView, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
+        jPanel2.add(btnAltaDietasView, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 240, 80));
 
         btnHomeView.setBackground(new java.awt.Color(255, 255, 255));
         btnHomeView.setForeground(new java.awt.Color(255, 255, 255));
@@ -124,8 +133,12 @@ public class viewMenu extends javax.swing.JFrame {
         content.setBackground(new java.awt.Color(89, 116, 146));
         content.setLayout(new java.awt.BorderLayout());
 
+        JpanelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo Menu.jpg"))); // NOI18N
-        content.add(jLabel1, java.awt.BorderLayout.CENTER);
+        JpanelMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, -1, 640));
+
+        content.add(JpanelMenu, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1280, 630));
 
@@ -156,7 +169,7 @@ public class viewMenu extends javax.swing.JFrame {
 
     private void btnHomeViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeViewActionPerformed
         content.removeAll();
-     //   content.add(content, BorderLayout.CENTER);
+        content.add(JpanelMenu, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
     }//GEN-LAST:event_btnHomeViewActionPerformed
@@ -165,10 +178,19 @@ public class viewMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAltaComidas1ActionPerformed
 
+    private void btnAltaDietasViewMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAltaDietasViewMouseEntered
+        btnAltaDietasView.setBackground(new Color(102,174,192));
+    }//GEN-LAST:event_btnAltaDietasViewMouseEntered
+
+    private void btnAltaDietasViewMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAltaDietasViewMouseExited
+        btnAltaDietasView.setBackground(Color.white);
+    }//GEN-LAST:event_btnAltaDietasViewMouseExited
+
     
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel JpanelMenu;
     private javax.swing.JButton btnAltaComidas1;
     private javax.swing.JButton btnAltaDietasView;
     private javax.swing.JButton btnAltaPacienteView;

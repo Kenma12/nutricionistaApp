@@ -5,6 +5,7 @@
 package vistas;
 
 import AccesoADatos.PacienteData;
+import AccesoADatos.RegistroPesoData;
 import entidades.Paciente;
 import entidades.PacientesServices;
 import java.awt.Color;
@@ -35,6 +36,7 @@ public class viewAltaPaciente extends javax.swing.JPanel {
     PacientesServices paciS = new PacientesServices();
     PacienteData paciD = new PacienteData();
     ArrayList<Paciente> pacientes = new ArrayList<>();
+    RegistroPesoData registroData = new RegistroPesoData();
     /**
      * Creates new form viewAltaPacientes
      */
@@ -87,7 +89,8 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         txtPesoD = new javax.swing.JTextField();
         btnModificarP = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnEliminarPaciente = new javax.swing.JButton();
+        btnRegistro = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(89, 116, 146));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -240,8 +243,14 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         });
         add(btnModificarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 520, 250, 60));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Eliminar Paciente button.png"))); // NOI18N
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 520, 290, 60));
+        btnEliminarPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Eliminar Paciente button.png"))); // NOI18N
+        btnEliminarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPacienteActionPerformed(evt);
+            }
+        });
+        add(btnEliminarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 520, 290, 60));
+        add(btnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 520, 70, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -322,13 +331,18 @@ public class viewAltaPaciente extends javax.swing.JPanel {
             String tel = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 3);
             String domicilio = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 4);
             
-            if (esNumero((String) modelo.getValueAt(tblPacientes.getSelectedRow(), 5)) && esNumero((String) modelo.getValueAt(tblPacientes.getSelectedRow(), 6))){
-                double pesoActual = Double.parseDouble((String) modelo.getValueAt(tblPacientes.getSelectedRow(), 5));
-                double pesoDeseado = Double.parseDouble((String) modelo.getValueAt(tblPacientes.getSelectedRow(), 6));
+            try{
+                Object objPesoActual = modelo.getValueAt(tblPacientes.getSelectedRow(), 5);
+                Object objPesoDeseado = modelo.getValueAt(tblPacientes.getSelectedRow(), 6);
+                
+                double pesoActual = Double.parseDouble(objPesoActual.toString());
+                double pesoDeseado = Double.parseDouble(objPesoDeseado.toString());
+                
                 Paciente p = new Paciente(id, nombre, domicilio, tel, dni, pesoActual, pesoDeseado);
                 paciD.modificarPesoPaciente(p);
                 cargarTabla();
-            }else{
+                
+            }catch(NumberFormatException ex){
                JOptionPane.showMessageDialog(null, "Solo se permite ingreso de numeros.");
             }     
         }else{
@@ -336,12 +350,40 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnModificarPActionPerformed
 
+    private void btnEliminarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPacienteActionPerformed
+        if (tblPacientes.getSelectedRow() != -1){
+            
+            // Mostrar un cuadro de diálogo de confirmación
+            int respuesta = JOptionPane.showConfirmDialog(null,
+            "¿Estás seguro de que quieres eliminar este paciente con sus registros?", // Mensaje de confirmación
+            "Confirmar Eliminación",
+            JOptionPane.YES_NO_OPTION // Tipo de opciones (Sí/No)
+            );
+            
+            // Comprobar la respuesta del usuario
+            if (respuesta == JOptionPane.YES_OPTION) {
+                paciD.eliminarPaciente((int) modelo.getValueAt(tblPacientes.getSelectedRow(), 0));
+                cargarTabla();
+            }     
+        }else{
+            JOptionPane.showMessageDialog(null, "Tiene que seleccionar una fila");
+        }
+    }//GEN-LAST:event_btnEliminarPacienteActionPerformed
+
     public static boolean esNumero(String texto) {
         String patron = "^\\d+(\\.\\d+)?$"; // Expresión regular para números enteros o decimales
         Pattern pattern = Pattern.compile(patron);
         Matcher matcher = pattern.matcher(texto);
         return matcher.matches();
     }
+    
+//    public static boolean esNumero(String texto){
+//        String patron = "^\\d+(\\.\\d+)?$"; // Expresión regular para números enteros o decimales
+//        Pattern pattern = Pattern.compile(patron);
+//        Matcher matcher = pattern.matcher(texto);
+//        return matcher.matches();
+//    }
+    
     private void armarTabla(){
         modelo.addColumn("Id");
         modelo.addColumn("Nombre");
@@ -374,8 +416,9 @@ public class viewAltaPaciente extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAltaPaciente;
+    private javax.swing.JButton btnEliminarPaciente;
     private javax.swing.JButton btnModificarP;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnRegistro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

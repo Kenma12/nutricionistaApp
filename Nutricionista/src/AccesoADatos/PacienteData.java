@@ -21,6 +21,7 @@ import org.mariadb.jdbc.Statement;
 public class PacienteData {
     
     private Connection conexion;
+    private RegistroPesoData registroData = new RegistroPesoData();
     
     public PacienteData(){
         conexion = Conexion.getConnection();
@@ -173,6 +174,7 @@ public class PacienteData {
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
+            registroData.eliminarRegistros(id);
             int ex = ps.executeUpdate();
             if(ex == 1){
                 JOptionPane.showMessageDialog(null, "Paciente eliminado.");
@@ -191,7 +193,6 @@ public class PacienteData {
             //Guarda su peso anterior en un registroPeso
             Paciente aux = buscarPacienteXId(paciente.getIdPaciente());
             RegistroPeso registro = new RegistroPeso(aux, aux.getPesoActual()); 
-            RegistroPesoData registroData = new RegistroPesoData();
             registroData.nuevoRegistro(registro);
             
             //ejecuta el cambio de peso
