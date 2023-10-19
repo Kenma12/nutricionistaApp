@@ -48,7 +48,7 @@ public class ComidaData {
         }
     }
     
-    public void bajaComida(int id){
+    public void eliminarComida(int id){
         String sql = "DELETE FROM `comida` WHERE idComida = ?";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);

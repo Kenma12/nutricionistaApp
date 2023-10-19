@@ -64,10 +64,10 @@ public class RegistroPesoData {
     
     public ArrayList<RegistroPeso> listarRegistrosXId(int id){
         ArrayList<RegistroPeso> registros = new ArrayList<>();
-        
+ 
         String sql = "SELECT `idRegistro_peso`, `idPaciente`, `peso` FROM `registro_peso` "
                 + "WHERE";
-  
+ 
         try{
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
