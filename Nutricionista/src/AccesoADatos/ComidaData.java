@@ -49,7 +49,7 @@ public class ComidaData {
     }
     
     public void eliminarComida(int id){
-        String sql = "DELETE FROM `comida` WHERE idComida = ?";
+        String sql = "DELETE FROM `dietacomida` WHERE idComida = ?";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
@@ -66,7 +66,7 @@ public class ComidaData {
     }
     
     public Comida buscarComidaXId(int id){
-        String sql = "SELECT `nombreComida`, `detalle`, `cantCalorias` FROM `comida` "
+        String sql = "SELECT `nombreComida`, `detalle`, `cantCalorias` FROM `dietacomida` "
                 + "WHERE idComida = ?";
         Comida comida = null;
         try{

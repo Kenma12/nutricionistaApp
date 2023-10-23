@@ -10,23 +10,23 @@ import java.time.LocalDate;
  *
  * @author Enzo-PC
  */
-public class Dieta {
+public class dieta{
     
     private int idDieta;
-    private String nombreDieta;
+    private String NombreDieta;
     private Paciente paciente;
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
     private double pesoInicial;
     private double pesoFinal;
 
-    public Dieta(){}
+    public dieta(){}
     
     //CONTRUCTOR CON ID
     
-    public Dieta(int idDieta, String nombreDieta, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
+    public dieta(int idDieta, String NombreDieta, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
         this.idDieta = idDieta;
-        this.nombreDieta = nombreDieta;
+        this.NombreDieta = NombreDieta;
         this.paciente = paciente;
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
@@ -36,8 +36,8 @@ public class Dieta {
     
     //CONTRUCTOR SIN ID
     
-    public Dieta(String nombreDieta, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
-        this.nombreDieta = nombreDieta;
+    public dieta(String NombreDieta, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
+        this.NombreDieta = NombreDieta;
         this.paciente = paciente;
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
@@ -54,11 +54,11 @@ public class Dieta {
     }
 
     public String getNombreDieta() {
-        return nombreDieta;
+        return NombreDieta;
     }
 
     public void setNombreDieta(String nombreDieta) {
-        this.nombreDieta = nombreDieta;
+        this.NombreDieta = nombreDieta;
     }
 
     public Paciente getPaciente() {

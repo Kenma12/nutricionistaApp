@@ -12,13 +12,13 @@ public class DietaComida {
     
     private int idDietaComida;
     private Comida comida;
-    private Dieta dieta;
+    private dieta dieta;
     
     public DietaComida(){}
     
     //CONSTRUCTOR CON ID
     
-    public DietaComida(int idDietaComida, Comida comida, Dieta dieta){
+    public DietaComida(int idDietaComida, Comida comida, dieta dieta){
         this.comida = comida;
         this.idDietaComida = idDietaComida;
         this.dieta = dieta;
@@ -26,7 +26,7 @@ public class DietaComida {
     
     //CONSTRUCTOR SIN ID
     
-    public DietaComida(Comida comida, Dieta dieta){
+    public DietaComida(Comida comida, dieta dieta){
         this.comida = comida;
         this.dieta = dieta;
     }
@@ -47,11 +47,11 @@ public class DietaComida {
         this.comida = comida;
     }
 
-    public Dieta getDieta() {
+    public dieta getDieta() {
         return dieta;
     }
 
-    public void setDieta(Dieta dieta) {
+    public void setDieta(dieta dieta) {
         this.dieta = dieta;
     }
     
