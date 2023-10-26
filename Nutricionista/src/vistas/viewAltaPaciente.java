@@ -8,6 +8,7 @@ import AccesoADatos.PacienteData;
 import AccesoADatos.RegistroPesoData;
 import entidades.Paciente;
 import entidades.PacientesServices;
+import entidades.RegistroPeso;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -28,10 +29,7 @@ public class viewAltaPaciente extends javax.swing.JPanel {
     
     DefaultTableModel modelo = new DefaultTableModel(){
         @Override
-        public boolean isCellEditable(int row, int column) {
-            if (column == 5 || column == 6){
-                return true;
-            }     
+        public boolean isCellEditable(int row, int column) { 
             return false;
         }   
     };
@@ -39,6 +37,9 @@ public class viewAltaPaciente extends javax.swing.JPanel {
     PacienteData paciD = new PacienteData();
     ArrayList<Paciente> pacientes = new ArrayList<>();
     RegistroPesoData registroData = new RegistroPesoData();
+    
+    
+    viewRegistroPacientes vR;
     /**
      * Creates new form viewAltaPacientes
      */
@@ -53,6 +54,8 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         txtDomicilio.setBorder(bordeInferior);
         txtPesoA.setBorder(bordeInferior);
         txtPesoD.setBorder(bordeInferior);
+        txtModPesoA.setBorder(bordeInferior);
+        txtModPesoD.setBorder(bordeInferior);
         btnRegistro.setEnabled(false);
         armarTabla();
         cargarTabla();
@@ -92,14 +95,18 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         btnModificarP = new javax.swing.JButton();
         btnEliminarPaciente = new javax.swing.JButton();
         btnRegistro = new javax.swing.JButton();
+        txtModPesoA = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtModPesoD = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(89, 116, 146));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Lista de Pacientes");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 210, 40));
+        jLabel2.setText("Peso Actual");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 400, 120, 40));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -189,9 +196,14 @@ public class viewAltaPaciente extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPacientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPacientes);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 70, 600, 400));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 70, 600, 240));
 
         txtDni.setBackground(new java.awt.Color(89, 116, 146));
         txtDni.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -263,6 +275,26 @@ public class viewAltaPaciente extends javax.swing.JPanel {
             }
         });
         add(btnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 510, 70, 80));
+
+        txtModPesoA.setBackground(new java.awt.Color(89, 116, 146));
+        txtModPesoA.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtModPesoA.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        add(txtModPesoA, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 400, 90, 40));
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Lista de Pacientes");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 210, 40));
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Peso Deseado");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 400, 140, 40));
+
+        txtModPesoD.setBackground(new java.awt.Color(89, 116, 146));
+        txtModPesoD.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtModPesoD.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        add(txtModPesoD, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 400, 90, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -318,6 +350,8 @@ public class viewAltaPaciente extends javax.swing.JPanel {
             txtPesoD.setText("");
             
             cargarTabla();
+            txtModPesoA.setText("");
+            txtModPesoD.setText("");
         }   
     }//GEN-LAST:event_btnAltaPacienteActionPerformed
 
@@ -334,26 +368,21 @@ public class viewAltaPaciente extends javax.swing.JPanel {
     }//GEN-LAST:event_txtPesoDActionPerformed
 
     private void btnModificarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPActionPerformed
-        
-        if (tblPacientes.getSelectedRow() != -1){
-        
+         if (tblPacientes.getSelectedRow() != -1){
             int id = (int) modelo.getValueAt(tblPacientes.getSelectedRow(), 0);
             String nombre = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 1);
             int dni = (int) modelo.getValueAt(tblPacientes.getSelectedRow(), 2);
             String tel = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 3);
             String domicilio = (String) modelo.getValueAt(tblPacientes.getSelectedRow(), 4);
-            
             try{
-                Object objPesoActual = modelo.getValueAt(tblPacientes.getSelectedRow(), 5);
-                Object objPesoDeseado = modelo.getValueAt(tblPacientes.getSelectedRow(), 6);
-                
-                double pesoActual = Double.parseDouble(objPesoActual.toString());
-                double pesoDeseado = Double.parseDouble(objPesoDeseado.toString());
-                
+                double pesoActual;
+                pesoActual = Double.parseDouble((txtModPesoA.getText()));
+                double pesoDeseado = Double.parseDouble(txtModPesoD.getText());
                 Paciente p = new Paciente(id, nombre, domicilio, tel, dni, pesoActual, pesoDeseado);
                 paciD.modificarPesoPaciente(p);
-                cargarTabla();
-                
+                txtModPesoA.setText("");
+                txtModPesoD.setText("");
+                cargarTabla();  
             }catch(NumberFormatException ex){
                JOptionPane.showMessageDialog(null, "Solo se permite ingreso de numeros.");
             }     
@@ -383,8 +412,24 @@ public class viewAltaPaciente extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEliminarPacienteActionPerformed
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        
+        vR = new viewRegistroPacientes(cargarRegistro());
+        vR.setVisible(true);
+        vR.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnRegistroActionPerformed
+
+    private void tblPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPacientesMouseClicked
+        int row = tblPacientes.rowAtPoint(evt.getPoint());
+        Object pesoA = tblPacientes.getValueAt(row, 5);
+        Object pesoD = tblPacientes.getValueAt(row, 6);
+        int id = (int) tblPacientes.getValueAt(row, 0);
+        
+        if (row >= 0){
+            String pesoActual = (pesoA.toString());
+            String pesoDeseado = (pesoD.toString());
+            txtModPesoA.setText(pesoActual);
+            txtModPesoD.setText(pesoDeseado);
+        }
+    }//GEN-LAST:event_tblPacientesMouseClicked
 
     public static boolean esNumero(String texto) {
         String patron = "^\\d+(\\.\\d+)?$"; // Expresión regular para números enteros o decimales
@@ -438,8 +483,13 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         
     }
     
-    
-    
+    public ArrayList<RegistroPeso> cargarRegistro(){
+        ArrayList<RegistroPeso> registros = new ArrayList<>();
+        int id = (int) tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 0);
+        registros.addAll(registroData.listarRegistrosXId(id));
+        return registros;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAltaPaciente;
@@ -447,6 +497,8 @@ public class viewAltaPaciente extends javax.swing.JPanel {
     private javax.swing.JButton btnModificarP;
     private javax.swing.JButton btnRegistro;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -460,6 +512,8 @@ public class viewAltaPaciente extends javax.swing.JPanel {
     private javax.swing.JTable tblPacientes;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtDomicilio;
+    private javax.swing.JTextField txtModPesoA;
+    private javax.swing.JTextField txtModPesoD;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPesoA;
     private javax.swing.JTextField txtPesoD;

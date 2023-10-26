@@ -14,20 +14,55 @@ public class RegistroPeso {
     
     private int idRegistroPeso;
     private Paciente paciente;
-    private double peso;
+    private double pesoA;
+    private double pesoD;
+    private LocalDate fecha;
 
+    
+    //CONSTRUCTOR VACIO
+    
     public RegistroPeso() {
     }
 
-    public RegistroPeso(int idRegistroPeso, Paciente paciente, double peso) {
+    //CONSTRUCTOR CON ID
+    
+    public RegistroPeso(int idRegistroPeso, Paciente paciente, double pesoA, double pesoD) {
         this.idRegistroPeso = idRegistroPeso;
         this.paciente = paciente;
-        this.peso = peso;
+        this.pesoA = pesoA;
+        this.pesoD = pesoD;
+    }
+    
+    //CONSTRUCTOR SIN ID
+
+    public RegistroPeso(Paciente paciente, double pesoA, double pesoD) {
+        this.paciente = paciente;
+        this.pesoA = pesoA;
+        this.pesoD = pesoD;    
     }
 
-    public RegistroPeso(Paciente paciente, double peso) {
-        this.paciente = paciente;
-        this.peso = peso;
+    public double getPesoA() {
+        return pesoA;
+    }
+
+    public void setPesoA(double pesoA) {
+        this.pesoA = pesoA;
+    }
+
+    public double getPesoD() {
+        return pesoD;
+    }
+
+    public void setPesoD(double pesoD) {
+        this.pesoD = pesoD;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
     public int getIdRegistroPeso() {
@@ -45,13 +80,5 @@ public class RegistroPeso {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
-
-    public double getPeso() {
-        return peso;
-    }
-
-    public void setPeso(double peso) {
-        this.peso = peso;
-    }  
     
 }

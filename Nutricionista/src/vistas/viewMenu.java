@@ -16,7 +16,6 @@ public class viewMenu extends javax.swing.JFrame {
     viewAltaDieta vDieta = new viewAltaDieta();
     viewAltaComida vComida = new viewAltaComida();
     
-    
     /**
      * Creates new form viewMenu
      */

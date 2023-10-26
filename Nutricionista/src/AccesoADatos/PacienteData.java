@@ -20,8 +20,8 @@ import org.mariadb.jdbc.Statement;
  */
 public class PacienteData {
     
-    private Connection conexion;
-    private RegistroPesoData registroData = new RegistroPesoData();
+    private final Connection conexion;
+    private final RegistroPesoData registroData = new RegistroPesoData();
     
     public PacienteData(){
         conexion = Conexion.getConnection();
@@ -178,7 +178,7 @@ public class PacienteData {
         try {
             //Guarda su peso anterior en un registroPeso
             Paciente aux = buscarPacienteXId(paciente.getIdPaciente());
-            RegistroPeso registro = new RegistroPeso(aux, aux.getPesoActual()); 
+            RegistroPeso registro = new RegistroPeso(aux, aux.getPesoActual(), aux.getPesoDeseado()); 
             registroData.nuevoRegistro(registro);
             
             //ejecuta el cambio de peso
