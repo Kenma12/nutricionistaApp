@@ -10,7 +10,7 @@ import java.time.LocalDate;
  *
  * @author Enzo-PC
  */
-public class dieta{
+public class Dieta{
     
     private int idDieta;
     private String NombreDieta;
@@ -20,11 +20,11 @@ public class dieta{
     private double pesoInicial;
     private double pesoFinal;
 
-    public dieta(){}
+    public Dieta(){}
     
     //CONTRUCTOR CON ID
     
-    public dieta(int idDieta, String NombreDieta, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
+    public Dieta(int idDieta, String NombreDieta, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
         this.idDieta = idDieta;
         this.NombreDieta = NombreDieta;
         this.paciente = paciente;
@@ -36,7 +36,7 @@ public class dieta{
     
     //CONTRUCTOR SIN ID
     
-    public dieta(String NombreDieta, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
+    public Dieta(String NombreDieta, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
         this.NombreDieta = NombreDieta;
         this.paciente = paciente;
         this.fechaInicial = fechaInicial;

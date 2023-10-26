@@ -4,7 +4,7 @@
  */
 package AccesoADatos;
 
-import entidades.dieta;
+import entidades.Dieta;
 import java.sql.Date;
 import org.mariadb.jdbc.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +25,7 @@ public class DietaData {
     public DietaData(){
         conexion = Conexion.getConnection();
     }
-    public void altaDietaData(dieta dieta){
+    public void altaDietaData(Dieta dieta){
         String sql = "INSERT INTO `dieta`(`NombreDieta`, `idPaciente`, `fechaInicial`, `fechaFinal`, `pesoInicial`, `pesoFinal`) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";
         try{
@@ -67,7 +67,7 @@ public class DietaData {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
     }
-    public void modificarDietaData(dieta dieta){
+    public void modificarDietaData(Dieta dieta){
         String sql = "UPDATE `dieta` "
                 + "SET `nombreDieta`=?,`idPaciente`=?,`fechaInicial`=? "
                 + "`fechaFinal`= ?,`pesoInicial`=?,`pesoFinal`=?"
