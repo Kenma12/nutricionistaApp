@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -49,7 +47,7 @@ public class ComidaData {
     }
     
     public void eliminarComida(int id){
-        String sql = "DELETE FROM `dietacomida` WHERE idComida = ?";
+        String sql = "DELETE FROM `comida` WHERE idComida = ?";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);

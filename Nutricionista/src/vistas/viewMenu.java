@@ -117,15 +117,25 @@ public class viewMenu extends javax.swing.JFrame {
         jPanel2.add(btnHomeView, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 60, 70));
 
         btnAltaComidas1.setBackground(new java.awt.Color(255, 255, 255));
-        btnAltaComidas1.setForeground(new java.awt.Color(255, 255, 255));
-        btnAltaComidas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/COMIDAS.PNG"))); // NOI18N
+        btnAltaComidas1.setFont(new java.awt.Font("Frank Ruhl Hofshi", 0, 36)); // NOI18N
+        btnAltaComidas1.setForeground(new java.awt.Color(89, 116, 146));
+        btnAltaComidas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Icon_vegetables (1).png"))); // NOI18N
+        btnAltaComidas1.setText("COMIDAS");
         btnAltaComidas1.setBorder(null);
+        btnAltaComidas1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAltaComidas1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAltaComidas1MouseExited(evt);
+            }
+        });
         btnAltaComidas1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAltaComidas1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAltaComidas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 250, 50));
+        jPanel2.add(btnAltaComidas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 10, 250, 80));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 90));
 
@@ -174,7 +184,10 @@ public class viewMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeViewActionPerformed
 
     private void btnAltaComidas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaComidas1ActionPerformed
-        // TODO add your handling code here:
+        content.removeAll();
+        content.add(vComida, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
     }//GEN-LAST:event_btnAltaComidas1ActionPerformed
 
     private void btnAltaDietasViewMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAltaDietasViewMouseEntered
@@ -185,9 +198,14 @@ public class viewMenu extends javax.swing.JFrame {
         btnAltaDietasView.setBackground(Color.white);
     }//GEN-LAST:event_btnAltaDietasViewMouseExited
 
-    
-    
-    
+    private void btnAltaComidas1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAltaComidas1MouseEntered
+        btnAltaComidas1.setBackground(new Color(102,174,192));
+    }//GEN-LAST:event_btnAltaComidas1MouseEntered
+
+    private void btnAltaComidas1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAltaComidas1MouseExited
+        btnAltaComidas1.setBackground(Color.white);
+    }//GEN-LAST:event_btnAltaComidas1MouseExited
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JpanelMenu;
     private javax.swing.JButton btnAltaComidas1;

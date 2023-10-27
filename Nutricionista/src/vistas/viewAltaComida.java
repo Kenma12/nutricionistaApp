@@ -4,19 +4,58 @@
  */
 package vistas;
 
+import AccesoADatos.ComidaData;
+import entidades.Comida;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.BasicListUI;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Enzo-PC
  */
 public class viewAltaComida extends javax.swing.JPanel {
 
+    DefaultTableModel modelo = new DefaultTableModel();
+    ComidaData comidaData = new ComidaData();
+    
     /**
      * Creates new form viewAltaComida
      */
     public viewAltaComida() {
         initComponents();
+        Border bordeInferior = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK);
+        txtCantCalorias.setBorder(bordeInferior);
+        txtNombreComida.setBorder(bordeInferior);
+        txtModNombre.setBorder(bordeInferior);
+        txtModCal.setBorder(bordeInferior);
+        armarTabla();
+        cargarTabla();
+        
+        tblComidas.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()){
+                    int i = tblComidas.getSelectedRow();
+                    if (i != -1){
+                        String nombre = tblComidas.getValueAt(i, 1).toString();
+                        String calorias = tblComidas.getValueAt(i, 2).toString();
+                        String detalle = tblComidas.getValueAt(i, 3).toString();
+                        cargarTexFields(nombre, calorias, detalle);
+                    }
+                }
+            }
+          
+        
+        });
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,19 +65,343 @@ public class viewAltaComida extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtNombreComida = new javax.swing.JTextField();
+        txtCantCalorias = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        btnAltaComida = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblComidas = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        btnEliminarComida = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtModNombre = new javax.swing.JTextField();
+        txtModCal = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDetalle = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtModDetalle = new javax.swing.JTextArea();
+
+        jPanel1.setBackground(new java.awt.Color(89, 116, 146));
+        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Nombre");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Detalle");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Cantidad de Calorias");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        txtNombreComida.setBackground(new java.awt.Color(89, 116, 146));
+        txtNombreComida.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtNombreComida.setForeground(new java.awt.Color(0, 0, 0));
+        txtNombreComida.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtNombreComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreComidaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtNombreComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 220, 40));
+
+        txtCantCalorias.setBackground(new java.awt.Color(89, 116, 146));
+        txtCantCalorias.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtCantCalorias.setForeground(new java.awt.Color(0, 0, 0));
+        txtCantCalorias.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(txtCantCalorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 70, 40));
+
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(408, 2, 0, 630));
+
+        btnAltaComida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Alta.png"))); // NOI18N
+        btnAltaComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaComidaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAltaComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 540, 110, 60));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("gr.");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, 40));
+
+        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 2, -1, 630));
+
+        tblComidas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Id", "Nombre", "Calorias"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblComidas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblComidas);
+        if (tblComidas.getColumnModel().getColumnCount() > 0) {
+            tblComidas.getColumnModel().getColumn(0).setResizable(false);
+            tblComidas.getColumnModel().getColumn(1).setResizable(false);
+            tblComidas.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 280, 400));
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Tabla de Comidas");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 210, -1));
+
+        jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(778, 2, 0, 630));
+
+        jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 2, 10, 630));
+
+        btnEliminarComida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Eliminar Comida.png"))); // NOI18N
+        btnEliminarComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarComidaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEliminarComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 540, 280, 60));
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Nombre");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 90, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Cantidad de Calorias");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 190, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("gr.");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, -1, 50));
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Detalle");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 300, -1, -1));
+
+        txtModNombre.setBackground(new java.awt.Color(89, 116, 146));
+        txtModNombre.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtModNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtModNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtModNombreActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtModNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 130, 190, 40));
+
+        txtModCal.setBackground(new java.awt.Color(89, 116, 146));
+        txtModCal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtModCal.setForeground(new java.awt.Color(0, 0, 0));
+        txtModCal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(txtModCal, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 230, 60, 40));
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Modificacion de Comidas");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, -1, -1));
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Modificar Comida.png"))); // NOI18N
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 540, 310, 60));
+
+        jLabel13.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setText("Alta de Comidas");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 190, 30));
+
+        txtDetalle.setColumns(18);
+        txtDetalle.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtDetalle.setForeground(new java.awt.Color(0, 0, 0));
+        txtDetalle.setRows(5);
+        jScrollPane2.setViewportView(txtDetalle);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 310, 140));
+
+        txtModDetalle.setColumns(18);
+        txtModDetalle.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtModDetalle.setForeground(new java.awt.Color(0, 0, 0));
+        txtModDetalle.setRows(5);
+        jScrollPane3.setViewportView(txtModDetalle);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 340, 340, 140));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtNombreComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreComidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreComidaActionPerformed
+
+    private void txtModNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtModNombreActionPerformed
+
+    private void btnAltaComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaComidaActionPerformed
+        //Comprueba si contiene numeros.
+        if (txtNombreComida.getText().matches(".*\\d.*")){
+            JOptionPane.showMessageDialog(null, "La casilla de NOMBRE no puede contener numeros.");
+            txtNombreComida.setText("");
+        
+        
+        }else if(txtNombreComida.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "La casilla de NOMBRE no puede estar vacia.");
+        
+        //Comprueba que solo contenga numeros.
+        }else if(!txtCantCalorias.getText().matches("\\d+") && !txtCantCalorias.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "La casilla de Cant. de Calorias solo puede contener numeros enteros.");
+            txtCantCalorias.setText("");
+        }else{
+            String nombre = txtNombreComida.getText();
+            int calorias = Integer.parseInt(txtCantCalorias.getText());
+            String detalle = txtDetalle.getText();
+            Comida comida = new Comida(nombre, detalle, calorias);
+            comidaData.altaComida(comida);
+            txtNombreComida.setText("");
+            txtDetalle.setText("");
+            txtCantCalorias.setText("");
+            cargarTabla();
+            vaciarTextFields();
+       }
+    }//GEN-LAST:event_btnAltaComidaActionPerformed
+
+    private void btnEliminarComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarComidaActionPerformed
+        if (tblComidas.getSelectedRow() != -1){
+            comidaData.eliminarComida((int) modelo.getValueAt(tblComidas.getSelectedRow(), 0));
+            cargarTabla();
+            vaciarTextFields();
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una comida de la tabla");
+        }
+    }//GEN-LAST:event_btnEliminarComidaActionPerformed
+
+    private void armarTabla(){
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Calorias");
+        modelo.addColumn("Detalle");
+        tblComidas.setModel(modelo);
+        tblComidas.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tblComidas.getColumnModel().getColumn(1).setPreferredWidth(50);
+        tblComidas.getColumnModel().getColumn(2).setPreferredWidth(20);
+        tblComidas.getColumnModel().getColumn(3).setPreferredWidth(100);
+    }
+    
+    private void cargarTabla(){
+        ArrayList<Comida> comidas = new ArrayList<>();
+        comidas.clear();
+        comidas.addAll(comidaData.listarComidas());
+        modelo.setRowCount(0);
+        for (Comida c:comidas){
+            modelo.addRow(new Object[]{c.getIdComida(), c.getNombreComida(), c.getCantCalorias(), c.getDetalle()});
+        }  
+    }
+    
+    private void cargarTexFields(String nombre, String calorias, String detalle){
+      txtModNombre.setText(nombre);
+      txtModDetalle.setText(detalle);
+      txtModCal.setText(calorias); 
+    }
+    
+    private void vaciarTextFields(){
+        txtModCal.setText("");
+        txtModDetalle.setText("");
+        txtModNombre.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAltaComida;
+    private javax.swing.JButton btnEliminarComida;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JTable tblComidas;
+    private javax.swing.JTextField txtCantCalorias;
+    private javax.swing.JTextArea txtDetalle;
+    private javax.swing.JTextField txtModCal;
+    private javax.swing.JTextArea txtModDetalle;
+    private javax.swing.JTextField txtModNombre;
+    private javax.swing.JTextField txtNombreComida;
     // End of variables declaration//GEN-END:variables
 }

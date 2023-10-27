@@ -340,16 +340,13 @@ public class viewAltaPaciente extends javax.swing.JPanel {
             String domicilio = txtDomicilio.getText();
             double pesoActual = Double.parseDouble(txtPesoA.getText());
             double pesoDeseado = Double.parseDouble(txtPesoD.getText());
-            
             paciS.crearPaciente(nombre, dni, tel, domicilio, pesoActual, pesoDeseado);
-    
             txtDni.setText("");
             txtDomicilio.setText("");
             txtNombre.setText("");
             txtTel.setText("");
             txtPesoA.setText("");
             txtPesoD.setText("");
-            
             cargarTabla();
             txtModPesoA.setText("");
             txtModPesoD.setText("");
