@@ -60,7 +60,7 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         armarTabla();
         cargarTabla();
         habilitarButton();
-        
+        filaSeleccionada();
         
     }
 
@@ -409,6 +409,27 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEliminarPacienteActionPerformed
 
+    private void filaSeleccionada(){
+        tblPacientes.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()){
+                    int i = tblPacientes.getSelectedRow();
+                    if (i != -1){
+                        String pesoA = tblPacientes.getValueAt(i, 5).toString();
+                        String pesoD = tblPacientes.getValueAt(i, 6).toString();
+                        cargarTextFields(pesoA, pesoD);
+                    }
+                }
+            } 
+        });
+    }
+    
+    private void cargarTextFields(String pesoA, String pesoD){
+        txtModPesoA.setText(pesoA);
+        txtModPesoD.setText(pesoD);
+    }
+    
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         vR = new viewRegistroPacientes(cargarRegistro());
         vR.setVisible(true);
@@ -423,17 +444,7 @@ public class viewAltaPaciente extends javax.swing.JPanel {
     }
     
     private void tblPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPacientesMouseClicked
-        int row = tblPacientes.rowAtPoint(evt.getPoint());
-        Object pesoA = tblPacientes.getValueAt(row, 5);
-        Object pesoD = tblPacientes.getValueAt(row, 6);
-        int id = (int) tblPacientes.getValueAt(row, 0);
-        
-        if (row >= 0){
-            String pesoActual = (pesoA.toString());
-            String pesoDeseado = (pesoD.toString());
-            txtModPesoA.setText(pesoActual);
-            txtModPesoD.setText(pesoDeseado);
-        }
+
     }//GEN-LAST:event_tblPacientesMouseClicked
 
     public static boolean esNumero(String texto) {

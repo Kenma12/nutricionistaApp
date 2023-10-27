@@ -119,7 +119,6 @@ public class ComidaData {
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, comida.getNombreComida());
-            System.out.println("nombre: " + comida.getNombreComida());
             ps.setString(2, comida.getDetalle());
             ps.setInt(3, comida.getCantCalorias());
             ps.setInt(4, comida.getIdComida());
@@ -127,7 +126,6 @@ public class ComidaData {
             if (ex==1){
                 JOptionPane.showMessageDialog(null, "Datos de la comida modificados.");
             }
-            System.out.println("ex: " + ex);
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
@@ -136,8 +134,19 @@ public class ComidaData {
     
     public ArrayList<Comida> listarComidasXCal(int cal){
         ArrayList<Comida> comidas = new ArrayList<>();
-        
-        
+        Comida comida;
+        String sql = "SELECT `idComida`,`nombreComida`, `detalle`, `cantCalorias`"
+                    + " FROM `comida` WHERE cantCalorias <= cal";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());            
+        }
         return comidas;
     }
     

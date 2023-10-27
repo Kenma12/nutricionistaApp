@@ -7,7 +7,6 @@ package vistas;
 import AccesoADatos.ComidaData;
 import entidades.Comida;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
@@ -35,6 +34,7 @@ public class viewAltaComida extends javax.swing.JPanel {
         txtNombreComida.setBorder(bordeInferior);
         txtModNombre.setBorder(bordeInferior);
         txtModCal.setBorder(bordeInferior);
+        txtMaxCal.setBorder(bordeInferior);
         armarTabla();
         cargarTabla();
         filaSeleccionada();
@@ -79,6 +79,10 @@ public class viewAltaComida extends javax.swing.JPanel {
         txtDetalle = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtModDetalle = new javax.swing.JTextArea();
+        jLabel14 = new javax.swing.JLabel();
+        txtMaxCal = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(89, 116, 146));
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -174,7 +178,7 @@ public class viewAltaComida extends javax.swing.JPanel {
             tblComidas.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 280, 400));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 280, 340));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -187,7 +191,7 @@ public class viewAltaComida extends javax.swing.JPanel {
 
         jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 2, 10, 630));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 2, 10, 630));
 
         btnEliminarComida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Eliminar Comida.png"))); // NOI18N
         btnEliminarComida.addActionListener(new java.awt.event.ActionListener() {
@@ -200,22 +204,22 @@ public class viewAltaComida extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Nombre");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 90, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 120, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Cantidad de Calorias");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 190, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 220, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("gr.");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, -1, 50));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 260, -1, 40));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Detalle");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 300, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 330, -1, -1));
 
         txtModNombre.setBackground(new java.awt.Color(89, 116, 146));
         txtModNombre.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -225,18 +229,18 @@ public class viewAltaComida extends javax.swing.JPanel {
                 txtModNombreActionPerformed(evt);
             }
         });
-        jPanel1.add(txtModNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 130, 190, 40));
+        jPanel1.add(txtModNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 160, 190, 40));
 
         txtModCal.setBackground(new java.awt.Color(89, 116, 146));
         txtModCal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtModCal.setForeground(new java.awt.Color(0, 0, 0));
         txtModCal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(txtModCal, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 230, 60, 40));
+        jPanel1.add(txtModCal, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 260, 60, 40));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Modificacion de Comidas");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, -1, -1));
 
         btnModificarComida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Modificar Comida.png"))); // NOI18N
         btnModificarComida.addActionListener(new java.awt.event.ActionListener() {
@@ -244,12 +248,12 @@ public class viewAltaComida extends javax.swing.JPanel {
                 btnModificarComidaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificarComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 540, 310, 60));
+        jPanel1.add(btnModificarComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 550, 310, 60));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Alta de Comidas");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 190, 30));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 190, 30));
 
         txtDetalle.setColumns(18);
         txtDetalle.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
@@ -265,7 +269,38 @@ public class viewAltaComida extends javax.swing.JPanel {
         txtModDetalle.setRows(5);
         jScrollPane3.setViewportView(txtModDetalle);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 340, 340, 140));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 370, 340, 140));
+
+        jLabel14.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setText("Maximo de Calorias: ");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
+
+        txtMaxCal.setBackground(new java.awt.Color(89, 116, 146));
+        txtMaxCal.setForeground(new java.awt.Color(0, 0, 0));
+        txtMaxCal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtMaxCal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaxCalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtMaxCal, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 80, 40));
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, 90, 40));
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 84, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -356,16 +391,41 @@ public class viewAltaComida extends javax.swing.JPanel {
            comida.setDetalle(detalle);
            comida.setCantCalorias(cal);
            comidaData.modificarComida(comida);
-           System.out.println("id: " + id);
            cargarTabla();
            vaciarTextFields();
-      }else{
-           System.out.println("error");
       }
-       
-       
     }//GEN-LAST:event_btnModificarComidaActionPerformed
 
+    private void txtMaxCalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaxCalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaxCalActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        if (txtMaxCal.getText().matches("\\d+")){
+            int cal = Integer.parseInt(txtMaxCal.getText());
+            cargarTablaXCal(cal);
+        }else{
+            JOptionPane.showMessageDialog(null, "Ingreso no valido.");
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtMaxCal.setText("");
+        cargarTabla();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void cargarTablaXCal(int cal){
+        ArrayList<Comida> comidas = new ArrayList<>();
+        comidas.clear();
+        comidas.addAll(comidaData.listarComidas());
+        modelo.setRowCount(0);
+        for (Comida c:comidas){
+            if (c.getCantCalorias() <= cal){
+                modelo.addRow(new Object[]{c.getIdComida(), c.getNombreComida(), c.getCantCalorias(), c.getDetalle()});
+            }
+        }  
+    }
+    
     private void armarTabla(){
         modelo.addColumn("Id");
         modelo.addColumn("Nombre");
@@ -398,17 +458,21 @@ public class viewAltaComida extends javax.swing.JPanel {
         txtModCal.setText("");
         txtModDetalle.setText("");
         txtModNombre.setText("");
+        txtMaxCal.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAltaComida;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminarComida;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificarComida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -428,6 +492,7 @@ public class viewAltaComida extends javax.swing.JPanel {
     private javax.swing.JTable tblComidas;
     private javax.swing.JTextField txtCantCalorias;
     private javax.swing.JTextArea txtDetalle;
+    private javax.swing.JTextField txtMaxCal;
     private javax.swing.JTextField txtModCal;
     private javax.swing.JTextArea txtModDetalle;
     private javax.swing.JTextField txtModNombre;
