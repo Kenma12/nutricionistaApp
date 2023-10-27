@@ -12,10 +12,6 @@ import org.mariadb.jdbc.Statement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author Enzo-PC
@@ -25,14 +21,13 @@ public class DietaData {
     public DietaData(){
         conexion = Conexion.getConnection();
     }
-    public void altaDietaData(Dieta dieta){
+    public void altaDieta(Dieta dieta){
         String sql = "INSERT INTO `dieta`(`NombreDieta`, `idPaciente`, `fechaInicial`, `fechaFinal`, `pesoInicial`, `pesoFinal`) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";
         try{
-            /* Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal)*/
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, dieta.getNombreDieta());
-            //ps.setPaciente(2, dieta.getPaciente());
+            ps.setInt(2, dieta.getPaciente().getIdPaciente());
             ps.setDate(3, Date.valueOf(dieta.getFechaInicial()));
             ps.setDate(4,Date.valueOf(dieta.getFechaFinal()));
             ps.setDouble(5,dieta.getPesoInicial());
@@ -50,9 +45,8 @@ public class DietaData {
         }
     }
     
-    public void eliminarDietaData(int id){
+    public void eliminarDieta(int id){
         String sql = "DELETE FROM `dieta` WHERE idDieta = ?";
-        
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
@@ -67,23 +61,15 @@ public class DietaData {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
     }
-    public void modificarDietaData(Dieta dieta){
+    public void modificarDieta(Dieta dieta){
         String sql = "UPDATE `dieta` "
-                + "SET `nombreDieta`=?,`idPaciente`=?,`fechaInicial`=? "
-                + "`fechaFinal`= ?,`pesoInicial`=?,`pesoFinal`=?"
-                + "WHERE idDieta = ?;";
-         /*  WHERE 1*/      
+                + "SET `nombreDieta`= ?,`idPaciente`= ?,`fechaInicial`= ? "
+                + "`fechaFinal`= ?,`pesoInicial`= ?,`pesoFinal`= ?"
+                + "WHERE idDieta = ?";      
         try {
-            /*no sirve aca 
-            //Guarda su peso anterior en un registroPeso
-            Paciente aux = buscarPacienteXId(paciente.getIdPaciente());
-            RegistroPeso registro = new RegistroPeso(aux, aux.getPesoActual()); 
-            registroData.nuevoRegistro(registro);*/
-            
-            //ejecuta el cambio de peso
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setString(1, dieta.getNombreDieta());
-           // ps.setPaciente(2, dieta.getPaciente());
+            ps.setInt(2, dieta.getPaciente().getIdPaciente());
             ps.setDate(3, Date.valueOf(dieta.getFechaInicial()));
             ps.setDate(4, Date.valueOf(dieta.getFechaFinal()));
             ps.setDouble(5, dieta.getPesoInicial());
@@ -96,6 +82,9 @@ public class DietaData {
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
-    } 
+    }
+    
+    
+    
 }
 

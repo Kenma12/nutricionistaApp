@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
