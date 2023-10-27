@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 public class RegistroPesoData {
     
     private final Connection conexion;
-    private PacienteData pData = new PacienteData();
+    //private PacienteData pData = new PacienteData();
     
     public RegistroPesoData(){
         conexion = Conexion.getConnection();
@@ -81,7 +81,7 @@ public class RegistroPesoData {
                 registro.setIdRegistroPeso(rs.getInt("idRegistro_peso"));
                 registro.setPesoA(rs.getDouble("pesoA"));
                 registro.setPesoD(rs.getDouble("pesoD"));
-                registro.setPaciente(pData.buscarPacienteXId(id));
+        //        registro.setPaciente(pData.buscarPacienteXId(id));
                 registro.setFecha(LocalDate.now());
                 registros.add(registro);
             }

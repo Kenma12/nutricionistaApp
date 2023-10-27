@@ -63,7 +63,7 @@ public class PacienteData {
         String sql = "SELECT `nombrePaciente`, `dni`, `domicilio`, `telefono`, `pesoActual`, `pesoDeseado`"
                 + "FROM `paciente` WHERE idPaciente = ?";
         
-        Paciente paci = null;
+        Paciente paci = new Paciente();
         
         try{
             PreparedStatement ps = conexion.prepareStatement(sql);
@@ -71,8 +71,6 @@ public class PacienteData {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()){
-                paci = new Paciente();
-                
                 paci.setIdPaciente(id);
                 paci.setDni(rs.getInt("dni"));
                 paci.setDomicilio(rs.getString("domicilio"));

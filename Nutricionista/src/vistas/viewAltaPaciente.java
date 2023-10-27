@@ -32,12 +32,12 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         public boolean isCellEditable(int row, int column) { 
             return false;
         }   
+        
     };
     PacientesServices paciS = new PacientesServices();
     PacienteData paciD = new PacienteData();
     ArrayList<Paciente> pacientes = new ArrayList<>();
     RegistroPesoData registroData = new RegistroPesoData();
-    
     
     viewRegistroPacientes vR;
     /**
@@ -163,7 +163,7 @@ public class viewAltaPaciente extends javax.swing.JPanel {
 
         btnAltaPaciente.setBackground(new java.awt.Color(0, 153, 204));
         btnAltaPaciente.setForeground(new java.awt.Color(0, 0, 0));
-        btnAltaPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Subir Button.png"))); // NOI18N
+        btnAltaPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Alta.png"))); // NOI18N
         btnAltaPaciente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnAltaPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,6 +196,7 @@ public class viewAltaPaciente extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblPacientes.getTableHeader().setReorderingAllowed(false);
         tblPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPacientesMouseClicked(evt);
@@ -417,6 +418,13 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         vR.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnRegistroActionPerformed
 
+    public ArrayList<RegistroPeso> cargarRegistro(){
+        ArrayList<RegistroPeso> registros = new ArrayList<>();
+        int id = (int) tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 0);
+        registros.addAll(registroData.listarRegistrosXId(id));
+        return registros;
+    }
+    
     private void tblPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPacientesMouseClicked
         int row = tblPacientes.rowAtPoint(evt.getPoint());
         Object pesoA = tblPacientes.getValueAt(row, 5);
@@ -483,12 +491,7 @@ public class viewAltaPaciente extends javax.swing.JPanel {
         
     }
     
-    public ArrayList<RegistroPeso> cargarRegistro(){
-        ArrayList<RegistroPeso> registros = new ArrayList<>();
-        int id = (int) tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 0);
-        registros.addAll(registroData.listarRegistrosXId(id));
-        return registros;
-    }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

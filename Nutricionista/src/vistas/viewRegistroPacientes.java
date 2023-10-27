@@ -15,10 +15,15 @@ import javax.swing.table.DefaultTableModel;
  * @author Enzo-PC
  */
 public class viewRegistroPacientes extends javax.swing.JFrame {
-    DefaultTableModel modelo =  new DefaultTableModel();
+    DefaultTableModel modelo =  new DefaultTableModel(){
+    @Override
+        public boolean isCellEditable(int row, int column) { 
+            return false;
+        }    
+    };
     RegistroPesoData registroData = new RegistroPesoData();
     private ArrayList<RegistroPeso> registros;
-    //viewAltaPaciente vAlta = new viewAltaPaciente();
+    viewAltaPaciente vAlta = new viewAltaPaciente();
     
     /**
      * Creates new form viewRegistroPacientes
@@ -52,6 +57,7 @@ public class viewRegistroPacientes extends javax.swing.JFrame {
 
             }
         ));
+        tblRegistros.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblRegistros);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
