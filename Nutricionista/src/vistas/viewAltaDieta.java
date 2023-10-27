@@ -4,19 +4,35 @@
  */
 package vistas;
 
+import AccesoADatos.PacienteData;
+import entidades.Paciente;
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.border.Border;
+import static vistas.viewAltaPaciente.esNumero;
+
 /**
  *
  * @author Enzo-PC
  */
 public class viewAltaDieta extends javax.swing.JPanel {
-
+    PacienteData pacienteData = new PacienteData();
+    ArrayList<Paciente> pacientes = new ArrayList();
     /**
      * Creates new form viewAltaDieta
      */
     public viewAltaDieta() {
         initComponents();
+        Border bordeInferior = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK);
+        txtNombre.setBorder(bordeInferior);
+        txtPesoIn.setBorder(bordeInferior);
+        txtPesoIn.setEditable(false);
+        txtPesoFinal.setBorder(bordeInferior);
+        cargarPacientes();
+        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,10 +42,179 @@ public class viewAltaDieta extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        CBPacientes = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtPesoIn = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        CFechaFin = new com.toedter.calendar.JDateChooser();
+        CFechaIn = new com.toedter.calendar.JDateChooser();
+        btnAlta = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtPesoFinal = new javax.swing.JTextField();
+        btnActualizar = new javax.swing.JButton();
+
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(89, 116, 146));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Alta de Dieta");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 160, 20));
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Seleccionar Paciente");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 30));
+
+        CBPacientes.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        CBPacientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Paciente" }));
+        CBPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBPacientesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CBPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 250, 50));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Nombre: ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Fecha de Inicio");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Fecha de Fin");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Peso Inicial: ");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+
+        txtPesoIn.setBackground(new java.awt.Color(89, 116, 146));
+        txtPesoIn.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtPesoIn.setForeground(new java.awt.Color(0, 0, 0));
+        txtPesoIn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(txtPesoIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 90, 40));
+
+        txtNombre.setBackground(new java.awt.Color(89, 116, 146));
+        txtNombre.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtNombre.setForeground(new java.awt.Color(0, 0, 0));
+        txtNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 250, 40));
+
+        CFechaFin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(CFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 110, 40));
+
+        CFechaIn.setBackground(new java.awt.Color(204, 204, 255));
+        CFechaIn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        CFechaIn.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(CFechaIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 120, 40));
+
+        btnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Alta.png"))); // NOI18N
+        btnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 110, 60));
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Peso Final: ");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, -1, -1));
+
+        txtPesoFinal.setBackground(new java.awt.Color(89, 116, 146));
+        txtPesoFinal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        txtPesoFinal.setForeground(new java.awt.Color(0, 0, 0));
+        txtPesoFinal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(txtPesoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 100, 40));
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 100, 30));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 630));
     }// </editor-fold>//GEN-END:initComponents
 
+   
+    
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
+        
+        if (txtNombre.getText().matches(".*\\d.*")){
+            JOptionPane.showMessageDialog(null, "La casilla de NOMBRE no puede contener numeros.");
+            txtNombre.setText("");
+        }else if(txtNombre.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "LA casilla NOMBRE no puede quedar vacia.");
+        }else if (!esNumero(txtPesoFinal.getText()) && !txtPesoFinal.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "La casilla de PESO FINAL solo puede contener numeros.");
+            txtPesoIn.setText("");
+        }else if(CFechaIn.getDate() == null || CFechaFin.getDate() == null){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar las fechas.");
+        }else{
+            String nombre = txtNombre.getText().toString();
+            double pesoIn = Double.parseDouble(txtPesoIn.getText());
+            Paciente paciente = pacientes.get(CBPacientes.getItemCount());
+            
+            
+        }
+    }//GEN-LAST:event_btnAltaActionPerformed
+
+    private void CBPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBPacientesActionPerformed
+        if (CBPacientes.getSelectedIndex() > 0){
+            double pesoA = pacientes.get(CBPacientes.getSelectedIndex()-1).getPesoActual();
+            txtPesoIn.setText(String.valueOf(pesoA));
+        }else{
+            txtPesoIn.setText("");
+        }
+    }//GEN-LAST:event_CBPacientesActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        cargarPacientes();
+        txtPesoIn.setText("");
+        CBPacientes.setSelectedIndex(0);
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void cargarPacientes(){
+        pacientes.clear();
+        pacientes.addAll(pacienteData.listarPacientes());
+        for (Paciente p:pacientes){
+            CBPacientes.addItem(p.toString());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CBPacientes;
+    private com.toedter.calendar.JDateChooser CFechaFin;
+    private com.toedter.calendar.JDateChooser CFechaIn;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAlta;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPesoFinal;
+    private javax.swing.JTextField txtPesoIn;
     // End of variables declaration//GEN-END:variables
 }
