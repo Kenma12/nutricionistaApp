@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicListUI;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,23 +37,7 @@ public class viewAltaComida extends javax.swing.JPanel {
         txtModCal.setBorder(bordeInferior);
         armarTabla();
         cargarTabla();
-        
-        tblComidas.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()){
-                    int i = tblComidas.getSelectedRow();
-                    if (i != -1){
-                        String nombre = tblComidas.getValueAt(i, 1).toString();
-                        String calorias = tblComidas.getValueAt(i, 2).toString();
-                        String detalle = tblComidas.getValueAt(i, 3).toString();
-                        cargarTexFields(nombre, calorias, detalle);
-                    }
-                }
-            }
-          
-        
-        });
+        filaSeleccionada();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,7 +73,7 @@ public class viewAltaComida extends javax.swing.JPanel {
         txtModNombre = new javax.swing.JTextField();
         txtModCal = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnModificarComida = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDetalle = new javax.swing.JTextArea();
@@ -255,8 +238,13 @@ public class viewAltaComida extends javax.swing.JPanel {
         jLabel12.setText("Modificacion de Comidas");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, -1, -1));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Modificar Comida.png"))); // NOI18N
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 540, 310, 60));
+        btnModificarComida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Modificar Comida.png"))); // NOI18N
+        btnModificarComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarComidaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnModificarComida, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 540, 310, 60));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
@@ -291,6 +279,23 @@ public class viewAltaComida extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void filaSeleccionada(){
+        tblComidas.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()){
+                    int i = tblComidas.getSelectedRow();
+                    if (i != -1){
+                        String nombre = tblComidas.getValueAt(i, 1).toString();
+                        String calorias = tblComidas.getValueAt(i, 2).toString();
+                        String detalle = tblComidas.getValueAt(i, 3).toString();
+                        cargarTexFields(nombre, calorias, detalle);
+                    }
+                }
+            }
+        });
+    }
+    
     private void txtNombreComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreComidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreComidaActionPerformed
@@ -337,6 +342,30 @@ public class viewAltaComida extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEliminarComidaActionPerformed
 
+    private void btnModificarComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComidaActionPerformed
+       Comida comida = new Comida(); 
+       
+       if (tblComidas.getSelectedRow() != -1){
+           
+           String nombre = txtModNombre.getText();
+           String detalle = txtModDetalle.getText();
+           int cal = Integer.parseInt(txtModCal.getText());
+           int id = (int) tblComidas.getValueAt(tblComidas.getSelectedRow(), 0);
+           comida.setIdComida(id);
+           comida.setNombreComida(nombre);
+           comida.setDetalle(detalle);
+           comida.setCantCalorias(cal);
+           comidaData.modificarComida(comida);
+           System.out.println("id: " + id);
+           cargarTabla();
+           vaciarTextFields();
+      }else{
+           System.out.println("error");
+      }
+       
+       
+    }//GEN-LAST:event_btnModificarComidaActionPerformed
+
     private void armarTabla(){
         modelo.addColumn("Id");
         modelo.addColumn("Nombre");
@@ -374,7 +403,7 @@ public class viewAltaComida extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAltaComida;
     private javax.swing.JButton btnEliminarComida;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnModificarComida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

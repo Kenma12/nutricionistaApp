@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -111,7 +113,33 @@ public class ComidaData {
         return comidas;
     }
     
+    public void modificarComida(Comida comida){
+        String sql = "UPDATE `comida` SET `nombreComida`=?,`detalle`=?,"
+                + "`cantCalorias`=? WHERE idComida = ?";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, comida.getNombreComida());
+            System.out.println("nombre: " + comida.getNombreComida());
+            ps.setString(2, comida.getDetalle());
+            ps.setInt(3, comida.getCantCalorias());
+            ps.setInt(4, comida.getIdComida());
+            int ex = ps.executeUpdate();
+            if (ex==1){
+                JOptionPane.showMessageDialog(null, "Datos de la comida modificados.");
+            }
+            System.out.println("ex: " + ex);
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }
+    }
     
+    public ArrayList<Comida> listarComidasXCal(int cal){
+        ArrayList<Comida> comidas = new ArrayList<>();
+        
+        
+        return comidas;
+    }
     
     
     
