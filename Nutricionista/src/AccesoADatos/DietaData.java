@@ -12,12 +12,14 @@ import org.mariadb.jdbc.Statement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
+import java.util.ArrayList;
 /**
  *
  * @author Enzo-PC
  */
 public class DietaData {
     private Connection conexion;
+    private PacienteData pData = new PacienteData();
     public DietaData(){
         conexion = Conexion.getConnection();
     }
@@ -80,10 +82,41 @@ public class DietaData {
                 JOptionPane.showMessageDialog(null, "La dieta se ha modificado.");
             }
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
     }
     
+    public ArrayList<Dieta> listarDietas(){
+        ArrayList<Dieta> dietas = new ArrayList<>();
+        String sql = "SELECT `idDieta`, `nombreDieta`, `idPaciente`, "
+                + "`fechaInicial`, `fechaFinal`, `pesoInicial`, `pesoFinal` FROM `dieta`";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            Dieta dieta = null;
+            while(rs.next()){
+                dieta = new Dieta();
+                dieta.setIdDieta(rs.getInt("idDieta"));
+                dieta.setNombreDieta(rs.getString("nombreDieta"));
+                dieta.setPaciente(pData.buscarPacienteXDni(rs.getInt("idPaciente")));
+                dieta.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
+                dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
+                dieta.setPesoInicial(rs.getDouble("pesoInicial"));
+                if (dieta.getFechaInicial().isEqual(dieta.getFechaFinal()) || dieta.getFechaInicial().isAfter(dieta.getFechaFinal())){
+                    dieta.setPesoFinal(dieta.getPaciente().getPesoActual());
+                }else{
+                    dieta.setPesoFinal(0);
+                }
+                dietas.add(dieta);
+            }
+            rs.close();
+            ps.close();
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }
+        
+        return dietas;
+    }
     
     
     

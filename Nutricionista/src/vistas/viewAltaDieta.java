@@ -4,14 +4,18 @@
  */
 package vistas;
 
+import AccesoADatos.DietaData;
 import AccesoADatos.PacienteData;
+import entidades.Dieta;
 import entidades.Paciente;
 import java.awt.Color;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
-import static vistas.viewAltaPaciente.esNumero;
 
 /**
  *
@@ -19,6 +23,7 @@ import static vistas.viewAltaPaciente.esNumero;
  */
 public class viewAltaDieta extends javax.swing.JPanel {
     PacienteData pacienteData = new PacienteData();
+    DietaData dietaData = new DietaData();
     ArrayList<Paciente> pacientes = new ArrayList();
     /**
      * Creates new form viewAltaDieta
@@ -29,7 +34,6 @@ public class viewAltaDieta extends javax.swing.JPanel {
         txtNombre.setBorder(bordeInferior);
         txtPesoIn.setBorder(bordeInferior);
         txtPesoIn.setEditable(false);
-        txtPesoFinal.setBorder(bordeInferior);
         cargarPacientes();
         
     }
@@ -55,8 +59,6 @@ public class viewAltaDieta extends javax.swing.JPanel {
         CFechaFin = new com.toedter.calendar.JDateChooser();
         CFechaIn = new com.toedter.calendar.JDateChooser();
         btnAlta = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        txtPesoFinal = new javax.swing.JTextField();
         btnActualizar = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -131,17 +133,6 @@ public class viewAltaDieta extends javax.swing.JPanel {
         });
         jPanel1.add(btnAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 110, 60));
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Peso Final: ");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, -1, -1));
-
-        txtPesoFinal.setBackground(new java.awt.Color(89, 116, 146));
-        txtPesoFinal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        txtPesoFinal.setForeground(new java.awt.Color(0, 0, 0));
-        txtPesoFinal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(txtPesoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 100, 40));
-
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,23 +147,26 @@ public class viewAltaDieta extends javax.swing.JPanel {
    
     
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
-        
         if (txtNombre.getText().matches(".*\\d.*")){
             JOptionPane.showMessageDialog(null, "La casilla de NOMBRE no puede contener numeros.");
             txtNombre.setText("");
         }else if(txtNombre.getText().equals("")){
             JOptionPane.showMessageDialog(null, "LA casilla NOMBRE no puede quedar vacia.");
-        }else if (!esNumero(txtPesoFinal.getText()) && !txtPesoFinal.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "La casilla de PESO FINAL solo puede contener numeros.");
-            txtPesoIn.setText("");
         }else if(CFechaIn.getDate() == null || CFechaFin.getDate() == null){
             JOptionPane.showMessageDialog(null, "Debe seleccionar las fechas.");
+        }else if(!CFechaIn.getDate().before(CFechaFin.getDate())){
+            JOptionPane.showMessageDialog(null, "La fecha de Inicio no puede ser mayor a la fecha Final.");
         }else{
-            String nombre = txtNombre.getText().toString();
+            String nombre = txtNombre.getText();
             double pesoIn = Double.parseDouble(txtPesoIn.getText());
-            Paciente paciente = pacientes.get(CBPacientes.getItemCount());
-            
-            
+            Paciente paciente = pacientes.get(CBPacientes.getSelectedIndex()-1);
+            System.out.println(paciente.getIdPaciente());
+            Date fechaIncial = CFechaIn.getDate();
+            Date fechaFinal = CFechaFin.getDate();
+            LocalDate fechaIn = fechaIncial.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaFin = fechaFinal.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Dieta dieta = new Dieta(nombre, paciente,fechaIn , fechaFin, pesoIn, 0);
+            dietaData.altaDieta(dieta);
         }
     }//GEN-LAST:event_btnAltaActionPerformed
 
@@ -211,10 +205,8 @@ public class viewAltaDieta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtPesoFinal;
     private javax.swing.JTextField txtPesoIn;
     // End of variables declaration//GEN-END:variables
 }
