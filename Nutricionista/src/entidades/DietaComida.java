@@ -13,6 +13,7 @@ public class DietaComida {
     private int idDietaComida;
     private Comida comida;
     private Dieta dieta;
+    private 
     
     public DietaComida(){}
     
