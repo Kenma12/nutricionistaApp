@@ -19,12 +19,13 @@ public class Dieta{
     private LocalDate fechaFinal;
     private double pesoInicial;
     private double pesoFinal;
+    private boolean dietaTerminada;
 
     public Dieta(){}
     
     //CONTRUCTOR CON ID
     
-    public Dieta(int idDieta, String NombreDieta, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
+    public Dieta(int idDieta, String NombreDieta, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal, boolean dietaTerminada) {
         this.idDieta = idDieta;
         this.NombreDieta = NombreDieta;
         this.paciente = paciente;
@@ -32,17 +33,19 @@ public class Dieta{
         this.fechaFinal = fechaFinal;
         this.pesoInicial = pesoInicial;
         this.pesoFinal = pesoFinal;
+        this.dietaTerminada = dietaTerminada;
     }
     
     //CONTRUCTOR SIN ID
     
-    public Dieta(String NombreDieta, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
+    public Dieta(String NombreDieta, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal, boolean dietaTerminada) {
         this.NombreDieta = NombreDieta;
         this.paciente = paciente;
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
         this.pesoInicial = pesoInicial;
         this.pesoFinal = pesoFinal;
+        this.dietaTerminada = dietaTerminada;
     }
 
     public int getIdDieta() {
@@ -100,10 +103,13 @@ public class Dieta{
     public void setPesoFinal(double pesoFinal) {
         this.pesoFinal = pesoFinal;
     }
-    
-    
-    
-   
-    
+
+    public boolean isDietaTerminada() {
+        return dietaTerminada;
+    }
+
+    public void setDietaTerminada(boolean dietaTerminada) {
+        this.dietaTerminada = dietaTerminada;
+    }
     
 }

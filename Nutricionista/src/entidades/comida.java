@@ -65,6 +65,11 @@ public class Comida {
     public void setCantCalorias(int cantCalorias) {
         this.cantCalorias = cantCalorias;
     }
+
+    @Override
+    public String toString() {
+        return nombreComida + " | cal:" + cantCalorias;
+    }
     
     
     

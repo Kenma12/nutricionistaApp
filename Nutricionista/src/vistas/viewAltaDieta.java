@@ -4,8 +4,10 @@
  */
 package vistas;
 
+import AccesoADatos.ComidaData;
 import AccesoADatos.DietaData;
 import AccesoADatos.PacienteData;
+import entidades.Comida;
 import entidades.Dieta;
 import entidades.Paciente;
 import java.awt.Color;
@@ -24,7 +26,9 @@ import javax.swing.border.Border;
 public class viewAltaDieta extends javax.swing.JPanel {
     PacienteData pacienteData = new PacienteData();
     DietaData dietaData = new DietaData();
+    ComidaData comidaData = new ComidaData();
     ArrayList<Paciente> pacientes = new ArrayList();
+    ArrayList<Comida> comidas = new ArrayList<>();
     /**
      * Creates new form viewAltaDieta
      */
@@ -34,7 +38,7 @@ public class viewAltaDieta extends javax.swing.JPanel {
         txtNombre.setBorder(bordeInferior);
         txtPesoIn.setBorder(bordeInferior);
         txtPesoIn.setEditable(false);
-        cargarPacientes();
+        cargarDatos();
         
     }
     /**
@@ -60,6 +64,17 @@ public class viewAltaDieta extends javax.swing.JPanel {
         CFechaIn = new com.toedter.calendar.JDateChooser();
         btnAlta = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
+        CBAlmuerzo = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        CBSnack = new javax.swing.JComboBox<>();
+        CBDesayuno = new javax.swing.JComboBox<>();
+        CBMerienda = new javax.swing.JComboBox<>();
+        CBCena = new javax.swing.JComboBox<>();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -83,47 +98,47 @@ public class viewAltaDieta extends javax.swing.JPanel {
                 CBPacientesActionPerformed(evt);
             }
         });
-        jPanel1.add(CBPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 250, 50));
+        jPanel1.add(CBPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 250, 50));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Nombre: ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        jLabel3.setText("Nombre de la Dieta: ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Fecha de Inicio");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Fecha de Fin");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Peso Inicial: ");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, -1));
 
         txtPesoIn.setBackground(new java.awt.Color(89, 116, 146));
         txtPesoIn.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtPesoIn.setForeground(new java.awt.Color(0, 0, 0));
         txtPesoIn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(txtPesoIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 90, 40));
+        jPanel1.add(txtPesoIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 90, 40));
 
         txtNombre.setBackground(new java.awt.Color(89, 116, 146));
         txtNombre.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(0, 0, 0));
         txtNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 250, 40));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 150, 40));
 
         CFechaFin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(CFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, 110, 40));
+        jPanel1.add(CFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 110, 40));
 
         CFechaIn.setBackground(new java.awt.Color(204, 204, 255));
         CFechaIn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         CFechaIn.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(CFechaIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 120, 40));
+        jPanel1.add(CFechaIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 120, 40));
 
         btnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Alta.png"))); // NOI18N
         btnAlta.addActionListener(new java.awt.event.ActionListener() {
@@ -131,7 +146,7 @@ public class viewAltaDieta extends javax.swing.JPanel {
                 btnAltaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 110, 60));
+        jPanel1.add(btnAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 510, 110, 60));
 
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +154,56 @@ public class viewAltaDieta extends javax.swing.JPanel {
                 btnActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 100, 30));
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 100, 30));
+
+        CBAlmuerzo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Almuerzo" }));
+        jPanel1.add(CBAlmuerzo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 150, 40));
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Desayuno: ");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Almuerzo:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 90, 20));
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Snack:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 60, 50));
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Merienda:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 80, 40));
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Cena:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 60, 40));
+
+        CBSnack.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Snack" }));
+        jPanel1.add(CBSnack, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, 150, 40));
+
+        CBDesayuno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin desayuno" }));
+        CBDesayuno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBDesayunoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CBDesayuno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 150, 40));
+
+        CBMerienda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Merienda" }));
+        jPanel1.add(CBMerienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 150, 40));
+
+        CBCena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Cena" }));
+        jPanel1.add(CBCena, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 160, 40));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 630));
     }// </editor-fold>//GEN-END:initComponents
@@ -165,8 +229,18 @@ public class viewAltaDieta extends javax.swing.JPanel {
             Date fechaFinal = CFechaFin.getDate();
             LocalDate fechaIn = fechaIncial.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate fechaFin = fechaFinal.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            Dieta dieta = new Dieta(nombre, paciente,fechaIn , fechaFin, pesoIn, 0);
+            double pesoFinal;
+            boolean dietaTerminada = false;
+            if (LocalDate.now().isEqual(fechaFin) || LocalDate.now().isAfter(fechaFin)){
+                pesoFinal = pesoIn;
+                dietaTerminada = true;
+            }else{
+                pesoFinal = 0;
+            }
+            
+            Dieta dieta = new Dieta(nombre, paciente,fechaIn , fechaFin, pesoIn, pesoFinal, dietaTerminada);
             dietaData.altaDieta(dieta);
+            limpiarDatos();
         }
     }//GEN-LAST:event_btnAltaActionPerformed
 
@@ -180,33 +254,83 @@ public class viewAltaDieta extends javax.swing.JPanel {
     }//GEN-LAST:event_CBPacientesActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        cargarPacientes();
+        cargarDatos();
         txtPesoIn.setText("");
         CBPacientes.setSelectedIndex(0);
+        CBDesayuno.setSelectedIndex(0);
+        CBAlmuerzo.setSelectedIndex(0);
+        CBMerienda.setSelectedIndex(0);
+        CBCena.setSelectedIndex(0);
+        CBSnack.setSelectedIndex(0);
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void cargarPacientes(){
+    private void CBDesayunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDesayunoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBDesayunoActionPerformed
+
+    private void cargarDatos(){
         pacientes.clear();
         pacientes.addAll(pacienteData.listarPacientes());
+        CBPacientes.removeAllItems();
+        CBPacientes.addItem("Seleccionar Paciente");
         for (Paciente p:pacientes){
             CBPacientes.addItem(p.toString());
         }
+        comidas.clear();
+        comidas.addAll(comidaData.listarComidas());
+        CBDesayuno.removeAllItems();
+        CBDesayuno.addItem("Sin Desayuno");
+        CBAlmuerzo.removeAllItems();
+        CBAlmuerzo.addItem("Sin Almuerzo");
+        CBMerienda.removeAllItems();
+        CBMerienda.addItem("Sin Merienda");
+        CBCena.removeAllItems();
+        CBCena.addItem("Sin Cena");
+        CBSnack.removeAllItems();
+        CBSnack.addItem("Sin Snack");
+        for(Comida c: comidas){
+            CBDesayuno.addItem(c.toString());
+            CBAlmuerzo.addItem(c.toString());
+            CBMerienda.addItem(c.toString());
+            CBCena.addItem(c.toString());
+            CBSnack.addItem(c.toString());
+        }
     }
 
+    private void limpiarDatos(){
+        txtNombre.setText("");
+        txtPesoIn.setText("");
+        CBPacientes.setSelectedIndex(0);
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CBAlmuerzo;
+    private javax.swing.JComboBox<String> CBCena;
+    private javax.swing.JComboBox<String> CBDesayuno;
+    private javax.swing.JComboBox<String> CBMerienda;
     private javax.swing.JComboBox<String> CBPacientes;
+    private javax.swing.JComboBox<String> CBSnack;
     private com.toedter.calendar.JDateChooser CFechaFin;
     private com.toedter.calendar.JDateChooser CFechaIn;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAlta;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPesoIn;
     // End of variables declaration//GEN-END:variables
+
+    
 }

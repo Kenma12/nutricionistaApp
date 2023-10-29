@@ -5,6 +5,7 @@
 package AccesoADatos;
 
 import entidades.Dieta;
+import entidades.Paciente;
 import java.sql.Date;
 import org.mariadb.jdbc.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,8 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Enzo-PC
@@ -24,8 +27,8 @@ public class DietaData {
         conexion = Conexion.getConnection();
     }
     public void altaDieta(Dieta dieta){
-        String sql = "INSERT INTO `dieta`(`NombreDieta`, `idPaciente`, `fechaInicial`, `fechaFinal`, `pesoInicial`, `pesoFinal`) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `dieta`(`NombreDieta`, `idPaciente`, `fechaInicial`, `fechaFinal`, `pesoInicial`, `pesoFinal`, `dietaTerminada`) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try{
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, dieta.getNombreDieta());
@@ -34,6 +37,7 @@ public class DietaData {
             ps.setDate(4,Date.valueOf(dieta.getFechaFinal()));
             ps.setDouble(5,dieta.getPesoInicial());
             ps.setDouble(6,dieta.getPesoFinal());
+            ps.setBoolean(7, dieta.isDietaTerminada());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()){
@@ -89,7 +93,7 @@ public class DietaData {
     public ArrayList<Dieta> listarDietas(){
         ArrayList<Dieta> dietas = new ArrayList<>();
         String sql = "SELECT `idDieta`, `nombreDieta`, `idPaciente`, "
-                + "`fechaInicial`, `fechaFinal`, `pesoInicial`, `pesoFinal` FROM `dieta`";
+                + "`fechaInicial`, `fechaFinal`, `pesoInicial`, `pesoFinal`, `dietaTerminada` FROM `dieta`";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -102,8 +106,18 @@ public class DietaData {
                 dieta.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
                 dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
                 dieta.setPesoInicial(rs.getDouble("pesoInicial"));
-                if (dieta.getFechaInicial().isEqual(dieta.getFechaFinal()) || dieta.getFechaInicial().isAfter(dieta.getFechaFinal())){
-                    dieta.setPesoFinal(dieta.getPaciente().getPesoActual());
+                dieta.setDietaTerminada(rs.getBoolean("dietaTerminada"));
+                if (dieta.getFechaInicial().isEqual(dieta.getFechaFinal()) 
+                        || dieta.getFechaInicial().isAfter(dieta.getFechaFinal()) 
+                        && !dieta.isDietaTerminada()){
+                    
+                    Paciente paciente = pData.buscarPacienteXId(rs.getInt("idPaciente"));
+                    dieta.setDietaTerminada(true);
+                    dieta.setPesoFinal(paciente.getPesoActual());
+                    finDieta(paciente.getPesoActual(), dieta.getIdDieta());
+                    
+                }else if (dieta.isDietaTerminada()){
+                    dieta.setPesoFinal(rs.getDouble("pesoFinal"));
                 }else{
                     dieta.setPesoFinal(0);
                 }
@@ -114,8 +128,20 @@ public class DietaData {
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
-        
         return dietas;
+    }
+    
+    private void finDieta(double pesoFinal, int id){
+        String sql = "UPDATE `dieta` SET `pesoFinal`=?, `dietaTerminada` = 1  "
+                + "WHERE idDieta = ?";
+        PreparedStatement ps;
+        try {
+            ps = conexion.prepareStatement(sql);
+            ps.setDouble(1, pesoFinal);
+            ps.setInt(2, id);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }
     }
     
     
