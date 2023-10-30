@@ -14,8 +14,6 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author Enzo-PC
@@ -68,20 +66,20 @@ public class DietaData {
         }
     }
     
-//    public void eliminarDietaXPaciente(int id){
-//        String sql = "DELETE FROM `dieta` WHERE idPaciente = ?";
-//        try {
-//            PreparedStatement ps = conexion.prepareStatement(sql);
-//            ps.setInt(1, id);
-//            int e = ps.executeUpdate();
-//            if (e > 0){
-//                JOptionPane.showMessageDialog(null, "Dietas del Paciente Borradas");
-//            }
-//            ps.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-//        }
-//    }
+    public void eliminarDietasXPaciente(int id){
+        String sql = "DELETE FROM `dieta` WHERE idPaciente = ?";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            int e = ps.executeUpdate();
+            if (e > 0){
+                JOptionPane.showMessageDialog(null, "Dietas del Paciente Borradas");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }
+    }
     
     public void modificarDieta(Dieta dieta){
         String sql = "UPDATE `dieta` "

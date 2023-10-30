@@ -394,11 +394,10 @@ public class viewAltaPaciente extends javax.swing.JPanel {
             
             // Mostrar un cuadro de diálogo de confirmación
             int respuesta = JOptionPane.showConfirmDialog(null,
-            "¿Estás seguro de que quieres eliminar este paciente con sus registros?", // Mensaje de confirmación
+            "¿Estás seguro de que quieres eliminar este paciente con sus registros y dietas?", // Mensaje de confirmación
             "Confirmar Eliminación",
-            JOptionPane.YES_NO_OPTION // Tipo de opciones (Sí/No)
+            JOptionPane.YES_NO_OPTION // Tipo de opciones (Si/No)
             );
-            
             // Comprobar la respuesta del usuario
             if (respuesta == JOptionPane.YES_OPTION) {
                 paciD.eliminarPaciente((int) modelo.getValueAt(tblPacientes.getSelectedRow(), 0));

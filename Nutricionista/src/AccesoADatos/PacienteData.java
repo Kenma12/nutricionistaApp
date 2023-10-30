@@ -22,7 +22,7 @@ public class PacienteData {
     
     private final Connection conexion;
     private final RegistroPesoData registroData = new RegistroPesoData();
-    //private final DietaData dietaData = new DietaData();
+    private DietaData dietaData;
     
     public PacienteData(){
         conexion = Conexion.getConnection();
@@ -154,9 +154,10 @@ public class PacienteData {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
             registroData.eliminarRegistros(id);
+            dietaData = new DietaData();
+            dietaData.eliminarDietasXPaciente(id);
             int ex = ps.executeUpdate();
             if(ex == 1){
-                //dietaData.eliminarDietaXPaciente(id);
                 JOptionPane.showMessageDialog(null, "Paciente eliminado.");
             }else{
                 JOptionPane.showMessageDialog(null, "El paciente no existe");

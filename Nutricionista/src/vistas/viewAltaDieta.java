@@ -5,10 +5,13 @@
 package vistas;
 
 import AccesoADatos.ComidaData;
+import AccesoADatos.DietaComidaData;
 import AccesoADatos.DietaData;
 import AccesoADatos.PacienteData;
 import entidades.Comida;
 import entidades.Dieta;
+import entidades.DietaComida;
+import entidades.Horario;
 import entidades.Paciente;
 import java.awt.Color;
 import java.time.LocalDate;
@@ -29,9 +32,8 @@ public class viewAltaDieta extends javax.swing.JPanel {
     ComidaData comidaData = new ComidaData();
     ArrayList<Paciente> pacientes = new ArrayList();
     ArrayList<Comida> comidas = new ArrayList<>();
-    /**
-     * Creates new form viewAltaDieta
-     */
+    DietaComidaData dietaComidaData = new DietaComidaData();
+    
     public viewAltaDieta() {
         initComponents();
         Border bordeInferior = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK);
@@ -39,7 +41,6 @@ public class viewAltaDieta extends javax.swing.JPanel {
         txtPesoIn.setBorder(bordeInferior);
         txtPesoIn.setEditable(false);
         cargarDatos();
-        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -156,8 +157,8 @@ public class viewAltaDieta extends javax.swing.JPanel {
         });
         jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 100, 30));
 
-        CBAlmuerzo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Almuerzo" }));
-        jPanel1.add(CBAlmuerzo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 150, 40));
+        CBAlmuerzo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Almuerzo" }));
+        jPanel1.add(CBAlmuerzo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 170, 40));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -166,60 +167,60 @@ public class viewAltaDieta extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Desayuno: ");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Almuerzo:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 90, 20));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 90, 20));
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Snack:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 60, 50));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 380, 70, 50));
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Merienda:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 80, 40));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, 80, 40));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Cena:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 60, 40));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, 60, 40));
 
-        CBSnack.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Snack" }));
-        jPanel1.add(CBSnack, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, 150, 40));
+        CBSnack.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Snack" }));
+        jPanel1.add(CBSnack, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 440, 160, 40));
 
-        CBDesayuno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin desayuno" }));
+        CBDesayuno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Desayuno" }));
         CBDesayuno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CBDesayunoActionPerformed(evt);
             }
         });
-        jPanel1.add(CBDesayuno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 150, 40));
+        jPanel1.add(CBDesayuno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 160, 40));
 
-        CBMerienda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Merienda" }));
-        jPanel1.add(CBMerienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, 150, 40));
+        CBMerienda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Merienda" }));
+        jPanel1.add(CBMerienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, 170, 40));
 
-        CBCena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sin Cena" }));
-        jPanel1.add(CBCena, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 160, 40));
+        CBCena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Cena" }));
+        jPanel1.add(CBCena, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 170, 40));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 630));
     }// </editor-fold>//GEN-END:initComponents
-
-   
     
     private void btnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaActionPerformed
-        if (txtNombre.getText().matches(".*\\d.*")){
-            JOptionPane.showMessageDialog(null, "La casilla de NOMBRE no puede contener numeros.");
-            txtNombre.setText("");
+        if (CBPacientes.getSelectedIndex() <=0){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un Paciente");
         }else if(txtNombre.getText().equals("")){
             JOptionPane.showMessageDialog(null, "LA casilla NOMBRE no puede quedar vacia.");
         }else if(CFechaIn.getDate() == null || CFechaFin.getDate() == null){
             JOptionPane.showMessageDialog(null, "Debe seleccionar las fechas.");
         }else if(!CFechaIn.getDate().before(CFechaFin.getDate())){
             JOptionPane.showMessageDialog(null, "La fecha de Inicio no puede ser mayor a la fecha Final.");
+        }else if(CBDesayuno.getSelectedIndex() <= 0 || CBAlmuerzo.getSelectedIndex() <= 0 || CBMerienda.getSelectedIndex() <= 0 
+                || CBCena.getSelectedIndex() <= 0 || CBSnack.getSelectedIndex() <= 0){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar las comidas.");
         }else{
             String nombre = txtNombre.getText();
             double pesoIn = Double.parseDouble(txtPesoIn.getText());
@@ -237,9 +238,23 @@ public class viewAltaDieta extends javax.swing.JPanel {
             }else{
                 pesoFinal = 0;
             }
-            
             Dieta dieta = new Dieta(nombre, paciente,fechaIn , fechaFin, pesoIn, pesoFinal, dietaTerminada);
             dietaData.altaDieta(dieta);
+            
+            //los datos de DietaComida
+            
+            DietaComida dietaComidaDesayuno = new DietaComida(comidas.get(CBDesayuno.getSelectedIndex()-1), dieta, Horario.DESAYUNO);
+            DietaComida dietaComidaAlmuerzo = new DietaComida(comidas.get(CBAlmuerzo.getSelectedIndex()-1), dieta, Horario.ALMUERZO);
+            DietaComida dietaComidaMerienda = new DietaComida(comidas.get(CBMerienda.getSelectedIndex()-1), dieta, Horario.MERIENDA);
+            DietaComida dietaComidaCena = new DietaComida(comidas.get(CBCena.getSelectedIndex()-1), dieta, Horario.CENA);
+            DietaComida dietaComidaSnack = new DietaComida(comidas.get(CBSnack.getSelectedIndex()-1), dieta, Horario.SNACK);
+            
+            dietaComidaData.altaDietaComida(dietaComidaDesayuno);
+            dietaComidaData.altaDietaComida(dietaComidaAlmuerzo);
+            dietaComidaData.altaDietaComida(dietaComidaMerienda);
+            dietaComidaData.altaDietaComida(dietaComidaCena);
+            dietaComidaData.altaDietaComida(dietaComidaSnack);
+            
             limpiarDatos();
         }
     }//GEN-LAST:event_btnAltaActionPerformed
@@ -279,15 +294,20 @@ public class viewAltaDieta extends javax.swing.JPanel {
         comidas.clear();
         comidas.addAll(comidaData.listarComidas());
         CBDesayuno.removeAllItems();
-        CBDesayuno.addItem("Sin Desayuno");
+        CBDesayuno.addItem("Seleccionar Desayuno");
+        
         CBAlmuerzo.removeAllItems();
-        CBAlmuerzo.addItem("Sin Almuerzo");
+        CBAlmuerzo.addItem("Seleccionar Almuerzo");
+        
         CBMerienda.removeAllItems();
-        CBMerienda.addItem("Sin Merienda");
+        CBMerienda.addItem("Seleccionar Merienda");
+        
         CBCena.removeAllItems();
-        CBCena.addItem("Sin Cena");
+        CBCena.addItem("Seleccionar Cena");
+        
         CBSnack.removeAllItems();
-        CBSnack.addItem("Sin Snack");
+        CBSnack.addItem("Seleccionar Snack");
+        
         for(Comida c: comidas){
             CBDesayuno.addItem(c.toString());
             CBAlmuerzo.addItem(c.toString());
@@ -301,6 +321,11 @@ public class viewAltaDieta extends javax.swing.JPanel {
         txtNombre.setText("");
         txtPesoIn.setText("");
         CBPacientes.setSelectedIndex(0);
+        CBDesayuno.setSelectedIndex(0);
+        CBAlmuerzo.setSelectedIndex(0);
+        CBMerienda.setSelectedIndex(0);
+        CBCena.setSelectedIndex(0);
+        CBSnack.setSelectedIndex(0);
     }
     
     
