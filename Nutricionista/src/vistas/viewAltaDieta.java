@@ -21,6 +21,7 @@ import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -33,6 +34,13 @@ public class viewAltaDieta extends javax.swing.JPanel {
     ArrayList<Paciente> pacientes = new ArrayList();
     ArrayList<Comida> comidas = new ArrayList<>();
     DietaComidaData dietaComidaData = new DietaComidaData();
+    DefaultTableModel modelo = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column) { 
+            return false;
+        }   
+    };
+    ArrayList<Dieta> dietas;
     
     public viewAltaDieta() {
         initComponents();
@@ -41,6 +49,8 @@ public class viewAltaDieta extends javax.swing.JPanel {
         txtPesoIn.setBorder(bordeInferior);
         txtPesoIn.setEditable(false);
         cargarDatos();
+        armarTabla();
+        cargarDietas();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,6 +86,10 @@ public class viewAltaDieta extends javax.swing.JPanel {
         CBDesayuno = new javax.swing.JComboBox<>();
         CBMerienda = new javax.swing.JComboBox<>();
         CBCena = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDietas = new javax.swing.JTable();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -206,6 +220,56 @@ public class viewAltaDieta extends javax.swing.JPanel {
         CBCena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Cena" }));
         jPanel1.add(CBCena, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 170, 40));
 
+        jLabel13.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setText("Lista de Dietas");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, -1, -1));
+
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(598, 2, 10, 630));
+
+        tblDietas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "id", "Nombre", "idPaciente", "Fecha Inicial", "Fecha Final", "Peso Inicial", "Fecha Final", "Terminada"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDietas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblDietas);
+        if (tblDietas.getColumnModel().getColumnCount() > 0) {
+            tblDietas.getColumnModel().getColumn(0).setResizable(false);
+            tblDietas.getColumnModel().getColumn(1).setResizable(false);
+            tblDietas.getColumnModel().getColumn(2).setResizable(false);
+            tblDietas.getColumnModel().getColumn(3).setResizable(false);
+            tblDietas.getColumnModel().getColumn(4).setResizable(false);
+            tblDietas.getColumnModel().getColumn(5).setResizable(false);
+            tblDietas.getColumnModel().getColumn(6).setResizable(false);
+            tblDietas.getColumnModel().getColumn(7).setResizable(false);
+        }
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 50, 660, 290));
+
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 630));
     }// </editor-fold>//GEN-END:initComponents
     
@@ -328,6 +392,26 @@ public class viewAltaDieta extends javax.swing.JPanel {
         CBSnack.setSelectedIndex(0);
     }
     
+    private void cargarDietas(){
+        dietas = new ArrayList<>();
+        dietas.addAll(dietaData.listarDietas());
+        for (Dieta d:dietas){
+            modelo.addRow(new Object[]{d.getIdDieta(), d.getNombreDieta(), d.getPaciente().getIdPaciente(),
+            d.getFechaInicial().toString(), d.getFechaFinal().toString(), d.getPesoInicial(), d.getPesoFinal(), d.isDietaTerminada()});
+        }
+    }
+    
+    private void armarTabla(){
+        modelo.addColumn("id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("idPaciente");
+        modelo.addColumn("Fecha Inicial");
+        modelo.addColumn("Fecha Final");
+        modelo.addColumn("Peso Inicial");
+        modelo.addColumn("Peso Final");
+        modelo.addColumn("terminada");
+        tblDietas.setModel(modelo);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CBAlmuerzo;
@@ -344,6 +428,7 @@ public class viewAltaDieta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -353,6 +438,9 @@ public class viewAltaDieta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable tblDietas;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPesoIn;
     // End of variables declaration//GEN-END:variables

@@ -116,11 +116,12 @@ public class DietaData {
                 dieta = new Dieta();
                 dieta.setIdDieta(rs.getInt("idDieta"));
                 dieta.setNombreDieta(rs.getString("nombreDieta"));
-                dieta.setPaciente(pData.buscarPacienteXDni(rs.getInt("idPaciente")));
+                dieta.setPaciente(pData.buscarPacienteXId(rs.getInt("idPaciente")));
                 dieta.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
                 dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
                 dieta.setPesoInicial(rs.getDouble("pesoInicial"));
                 dieta.setDietaTerminada(rs.getBoolean("dietaTerminada"));
+                
                 if (dieta.getFechaInicial().isEqual(dieta.getFechaFinal()) 
                         || dieta.getFechaInicial().isAfter(dieta.getFechaFinal()) 
                         && !dieta.isDietaTerminada()){
