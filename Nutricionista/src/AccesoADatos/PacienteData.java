@@ -22,6 +22,7 @@ public class PacienteData {
     
     private final Connection conexion;
     private final RegistroPesoData registroData = new RegistroPesoData();
+    //private final DietaData dietaData = new DietaData();
     
     public PacienteData(){
         conexion = Conexion.getConnection();
@@ -54,9 +55,6 @@ public class PacienteData {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
     }
-    
-    
-    
     
     public Paciente buscarPacienteXId(int id){
         
@@ -152,13 +150,13 @@ public class PacienteData {
     
     public void eliminarPaciente(int id){
         String sql = "DELETE FROM `paciente` WHERE idPaciente = ?";
-        
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
             registroData.eliminarRegistros(id);
             int ex = ps.executeUpdate();
             if(ex == 1){
+                //dietaData.eliminarDietaXPaciente(id);
                 JOptionPane.showMessageDialog(null, "Paciente eliminado.");
             }else{
                 JOptionPane.showMessageDialog(null, "El paciente no existe");
