@@ -104,6 +104,23 @@ public class DietaData {
         }
     }
     
+        public void modificarNombreDieta(String nombre, int id){
+        String sql = "UPDATE `dieta` SET `nombreDieta`= ? WHERE idDieta = ?";
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ps.setInt(2, id);
+            int e = ps.executeUpdate();
+            if (e==1){
+                JOptionPane.showMessageDialog(null, "Nombre modificado con exito.");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }
+    }
+    
+    
     public ArrayList<Dieta> listarDietas(){
         ArrayList<Dieta> dietas = new ArrayList<>();
         String sql = "SELECT `idDieta`, `nombreDieta`, `idPaciente`, "

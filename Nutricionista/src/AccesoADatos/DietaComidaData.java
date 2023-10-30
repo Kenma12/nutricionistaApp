@@ -4,9 +4,7 @@
  */
 package AccesoADatos;
 
-import entidades.Dieta;
 import entidades.DietaComida;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,25 +44,18 @@ public class DietaComidaData {
         }
     }
     
-//    public void eliminarDietasComidasXPaciente(int id){
-//        String sql = "DELETE FROM `dietacomida` WHERE idPaciente"
-//        
-//    }
-    /*
-    public void eliminarDietasXPaciente(int id){
-        String sql = "DELETE FROM `dieta` WHERE idPaciente = ?";
+    public void eliminarDietaComida(int idDieta){
+        String sql = "DELETE FROM `dietacomida` WHERE idDieta = ?";
+        
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, idDieta);
             int e = ps.executeUpdate();
-            if (e > 0){
-                JOptionPane.showMessageDialog(null, "Dietas del Paciente Borradas");
-            }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
+        
     }
-    */
     
 }
