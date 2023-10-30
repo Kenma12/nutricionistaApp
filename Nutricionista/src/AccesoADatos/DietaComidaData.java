@@ -4,10 +4,12 @@
  */
 package AccesoADatos;
 
+import entidades.Comida;
 import entidades.DietaComida;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Connection;
 import org.mariadb.jdbc.Statement;
@@ -20,6 +22,7 @@ public class DietaComidaData {
     
     private Connection conexion;
     private PacienteData pData = new PacienteData();
+    private ComidaData comidaData = new ComidaData();
     public DietaComidaData(){
         conexion = Conexion.getConnection();
     }
@@ -55,7 +58,23 @@ public class DietaComidaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
-        
+    }
+    
+    public ArrayList<String> getComidas(int id){
+        ArrayList<String> comidas = new ArrayList<>();
+        String sql = "SELECT `idComida` FROM `dietacomida` WHERE idDieta = ?";
+        String comida;
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+//            while(rs.next()){
+////                comida = comidaData.buscarComidaXId(rs.getInt("idComida")).getNombreComida();
+////                comidas.add(comida);
+//            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }
+        return comidas;
     }
     
 }

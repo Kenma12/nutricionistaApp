@@ -103,11 +103,11 @@ public class viewAltaDieta extends javax.swing.JPanel {
         jLabel23 = new javax.swing.JLabel();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtSnack = new javax.swing.JTextField();
+        txtDesayuno = new javax.swing.JTextField();
+        txtAlmuerzo = new javax.swing.JTextField();
+        txtMerienda = new javax.swing.JTextField();
+        txtCena = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -340,30 +340,35 @@ public class viewAltaDieta extends javax.swing.JPanel {
         });
         jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 570, 110, 50));
 
-        jTextField1.setBackground(new java.awt.Color(89, 116, 146));
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 480, 110, 30));
+        txtSnack.setBackground(new java.awt.Color(89, 116, 146));
+        txtSnack.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtSnack.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(txtSnack, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 480, 110, 30));
 
-        jTextField2.setBackground(new java.awt.Color(89, 116, 146));
-        jTextField2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 480, 110, 30));
+        txtDesayuno.setBackground(new java.awt.Color(89, 116, 146));
+        txtDesayuno.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtDesayuno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtDesayuno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDesayunoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtDesayuno, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 480, 110, 30));
 
-        jTextField3.setBackground(new java.awt.Color(89, 116, 146));
-        jTextField3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, 110, 30));
+        txtAlmuerzo.setBackground(new java.awt.Color(89, 116, 146));
+        txtAlmuerzo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtAlmuerzo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(txtAlmuerzo, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 480, 110, 30));
 
-        jTextField4.setBackground(new java.awt.Color(89, 116, 146));
-        jTextField4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 480, 110, 30));
+        txtMerienda.setBackground(new java.awt.Color(89, 116, 146));
+        txtMerienda.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtMerienda.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(txtMerienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 480, 110, 30));
 
-        jTextField5.setBackground(new java.awt.Color(89, 116, 146));
-        jTextField5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 480, 110, 30));
+        txtCena.setBackground(new java.awt.Color(89, 116, 146));
+        txtCena.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtCena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(txtCena, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 480, 110, 30));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 630));
     }// </editor-fold>//GEN-END:initComponents
@@ -415,6 +420,7 @@ public class viewAltaDieta extends javax.swing.JPanel {
             dietaComidaData.altaDietaComida(dietaComidaSnack);
             
             limpiarDatos();
+            modelo.setRowCount(0);
             cargarDietas();
         }
     }//GEN-LAST:event_btnAltaActionPerformed
@@ -478,6 +484,10 @@ public class viewAltaDieta extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void txtDesayunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDesayunoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDesayunoActionPerformed
+
     private void filaSeleccionada(){
         tblDietas.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             @Override
@@ -487,10 +497,21 @@ public class viewAltaDieta extends javax.swing.JPanel {
                     if (i != -1){
                         String nombreDieta = tblDietas.getValueAt(i, 1).toString();
                         txtModNombre.setText(nombreDieta);
+                        ArrayList<String> textos = new ArrayList<>();
+                        textos.addAll(dietaComidaData.getComidas((int) tblDietas.getValueAt(i, 0)));
+                        //cargarTextos(textos);
                     }
                 }
             } 
         });
+    }
+    
+    private void cargarTextos(ArrayList<String> textos){
+        txtDesayuno.setText(textos.get(0));
+        txtAlmuerzo.setText(textos.get(1));
+        txtMerienda.setText(textos.get(2));
+        txtCena.setText(textos.get(3));
+        txtSnack.setText(textos.get(4));
     }
     
     private void cargarDatos(){
@@ -594,15 +615,15 @@ public class viewAltaDieta extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTable tblDietas;
+    private javax.swing.JTextField txtAlmuerzo;
+    private javax.swing.JTextField txtCena;
+    private javax.swing.JTextField txtDesayuno;
+    private javax.swing.JTextField txtMerienda;
     private javax.swing.JTextField txtModNombre;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPesoIn;
+    private javax.swing.JTextField txtSnack;
     // End of variables declaration//GEN-END:variables
 
     
