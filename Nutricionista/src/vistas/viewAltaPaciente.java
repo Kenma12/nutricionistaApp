@@ -401,6 +401,7 @@ public class viewAltaPaciente extends javax.swing.JPanel {
             // Comprobar la respuesta del usuario
             if (respuesta == JOptionPane.YES_OPTION) {
                 paciD.eliminarPaciente((int) modelo.getValueAt(tblPacientes.getSelectedRow(), 0));
+                //FALTO BORRAR DIETAS Y DIETACOMIDAS;
                 cargarTabla();
             }     
         }else{

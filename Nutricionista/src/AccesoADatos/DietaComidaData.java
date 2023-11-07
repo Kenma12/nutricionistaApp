@@ -67,10 +67,10 @@ public class DietaComidaData {
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-//            while(rs.next()){
-////                comida = comidaData.buscarComidaXId(rs.getInt("idComida")).getNombreComida();
-////                comidas.add(comida);
-//            }
+            while(rs.next()){
+               comida = comidaData.buscarComidaXId(rs.getInt("idComida")).getNombreComida();
+                comidas.add(comida);
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
