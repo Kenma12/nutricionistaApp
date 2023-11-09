@@ -64,7 +64,7 @@ public class ComidaData {
     }
     
     public Comida buscarComidaXId(int id){
-        String sql = "SELECT `nombreComida`, `detalle`, `cantCalorias` FROM `dietacomida` "
+        String sql = "SELECT `nombreComida`, `detalle`, `cantCalorias` FROM `comida` "
                 + "WHERE idComida = ?";
         Comida comida = null;
         try{
@@ -141,7 +141,6 @@ public class ComidaData {
             while(rs.next()){
                 
             }
-            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());            
         }

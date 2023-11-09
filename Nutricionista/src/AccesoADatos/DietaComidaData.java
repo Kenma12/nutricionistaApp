@@ -5,11 +5,14 @@
 package AccesoADatos;
 
 import entidades.Comida;
+import entidades.Dieta;
 import entidades.DietaComida;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Connection;
 import org.mariadb.jdbc.Statement;
@@ -23,6 +26,7 @@ public class DietaComidaData {
     private Connection conexion;
     private PacienteData pData = new PacienteData();
     private ComidaData comidaData = new ComidaData();
+    private DietaData dietaData = new DietaData();
     public DietaComidaData(){
         conexion = Conexion.getConnection();
     }
@@ -60,15 +64,16 @@ public class DietaComidaData {
         }
     }
     
-    public ArrayList<String> getComidas(int id){
-        ArrayList<String> comidas = new ArrayList<>();
+    public ArrayList<Comida> getComidas(int id){
+        ArrayList<Comida> comidas = new ArrayList<>();
         String sql = "SELECT `idComida` FROM `dietacomida` WHERE idDieta = ?";
-        String comida;
+        Comida comida;
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-               comida = comidaData.buscarComidaXId(rs.getInt("idComida")).getNombreComida();
+                comida = comidaData.buscarComidaXId(rs.getInt("idComida"));
                 comidas.add(comida);
             }
         } catch (SQLException ex) {
@@ -76,5 +81,39 @@ public class DietaComidaData {
         }
         return comidas;
     }
+
+    public void eliminarDietasComidasXDieta(int idPaciente) {
+        String sql = "DELETE FROM `dietacomida` WHERE idDieta = ?"; 
+        ArrayList<Dieta> dietas = dietaData.listarDietasXPaciente(pData.buscarPacienteXId(idPaciente).getIdPaciente());         
+        try {
+            for(Dieta d:dietas){
+                PreparedStatement ps = conexion.prepareStatement(sql);
+                ps.setInt(1, d.getIdDieta());
+                ps.executeUpdate();
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }
+        
+        
+        
+        /*
+        String sql = "DELETE FROM `dieta` WHERE idPaciente = ?";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            int e = ps.executeUpdate();
+            if (e > 0){
+                JOptionPane.showMessageDialog(null, "Dietas del Paciente Borradas");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }
+        */
+    }
+    
+    
     
 }

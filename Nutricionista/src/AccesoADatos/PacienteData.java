@@ -149,15 +149,15 @@ public class PacienteData {
     
     
     public void eliminarPaciente(int id){
+        DietaComidaData dietaComidaData = new DietaComidaData();
         String sql = "DELETE FROM `paciente` WHERE idPaciente = ?";
-        
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
             registroData.eliminarRegistros(id);
             dietaData = new DietaData();
-            dietaData.eliminarDietasXPaciente(id);
-          //Falta eliminar las dietaComida; 
+            dietaComidaData.eliminarDietasComidasXDieta(id);
+            dietaData.eliminarDietasXPaciente(id);        
             int ex = ps.executeUpdate();
             if(ex == 1){
                 JOptionPane.showMessageDialog(null, "Paciente eliminado.");

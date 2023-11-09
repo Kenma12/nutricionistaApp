@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Enzo-PC
@@ -162,6 +164,37 @@ public class DietaData {
         }
         return dietas;
     }
+    
+    public ArrayList<Dieta> listarDietasXPaciente(int id){
+        ArrayList<Dieta> dietas = new ArrayList();
+        String sql = "SELECT `idDieta`, `nombreDieta`, `idPaciente`, "
+        + "`fechaInicial`, `fechaFinal`, `pesoInicial`, `pesoFinal`, `dietaTerminada` "
+        + "FROM `dieta` WHERE idPaciente = ?";
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            Dieta dieta;
+            while(rs.next()){
+                dieta = new Dieta();
+                dieta.setIdDieta(rs.getInt("idDieta"));
+                dieta.setNombreDieta(rs.getString("nombreDieta"));
+                dieta.setPaciente(pData.buscarPacienteXId(rs.getInt("idPaciente")));
+                dieta.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
+                dieta.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
+                dieta.setPesoInicial(rs.getDouble("pesoInicial"));
+                dieta.setDietaTerminada(rs.getBoolean("dietaTerminada"));
+                dietas.add(dieta);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        }
+        return dietas;
+    }
+    
     
     private void finDieta(double pesoFinal, int id){
         String sql = "UPDATE `dieta` SET `pesoFinal`=?, `dietaTerminada` = 1  "
