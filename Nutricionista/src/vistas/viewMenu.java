@@ -6,6 +6,10 @@ package vistas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Enzo-PC
@@ -28,6 +32,8 @@ public class viewMenu extends javax.swing.JFrame {
         vDieta.setLocation(0, 0);
         vComida.setSize(500, 300);
         vComida.setLocation(0, 0);
+        
+        
     }
 
     /**
@@ -40,14 +46,17 @@ public class viewMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         btnAltaPacienteView = new javax.swing.JButton();
+        content = new javax.swing.JPanel();
+        JpanelMenu = new javax.swing.JPanel();
+        lblLinkedin = new javax.swing.JLabel();
+        lblGitHub = new javax.swing.JLabel();
+        lblFondoMenu = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         btnAltaDietasView = new javax.swing.JButton();
         btnHomeView = new javax.swing.JButton();
         btnAltaComidas1 = new javax.swing.JButton();
-        content = new javax.swing.JPanel();
-        JpanelMenu = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("NUTRICION ULP");
@@ -73,6 +82,37 @@ public class viewMenu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAltaPacienteView, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 10, 290, 80));
+
+        content.setBackground(new java.awt.Color(89, 116, 146));
+        content.setLayout(new java.awt.BorderLayout());
+
+        JpanelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblLinkedin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LinkedinLogo.png"))); // NOI18N
+        lblLinkedin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblLinkedin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLinkedinMouseClicked(evt);
+            }
+        });
+        JpanelMenu.add(lblLinkedin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 560, 70, -1));
+
+        lblGitHub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/GitHubLogo.png"))); // NOI18N
+        lblGitHub.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblGitHub.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblGitHubMouseClicked(evt);
+            }
+        });
+        JpanelMenu.add(lblGitHub, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 562, -1, -1));
+
+        lblFondoMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo Menu.jpg"))); // NOI18N
+        JpanelMenu.add(lblFondoMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, -1, 640));
+
+        content.add(JpanelMenu, java.awt.BorderLayout.PAGE_START);
+        content.add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1280, 630));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -139,18 +179,6 @@ public class viewMenu extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 90));
 
-        content.setBackground(new java.awt.Color(89, 116, 146));
-        content.setLayout(new java.awt.BorderLayout());
-
-        JpanelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo Menu.jpg"))); // NOI18N
-        JpanelMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -5, -1, 640));
-
-        content.add(JpanelMenu, java.awt.BorderLayout.PAGE_START);
-
-        getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1280, 630));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -206,6 +234,44 @@ public class viewMenu extends javax.swing.JFrame {
         btnAltaComidas1.setBackground(Color.white);
     }//GEN-LAST:event_btnAltaComidas1MouseExited
 
+    private void lblLinkedinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLinkedinMouseClicked
+        if (java.awt.Desktop.isDesktopSupported()){
+            
+            java.awt.Desktop desk = java.awt.Desktop.getDesktop();
+            
+            if (desk.isSupported(java.awt.Desktop.Action.BROWSE)){
+                try {
+                    java.net.URI url = new java.net.URI("https://www.linkedin.com/in/ugarte-enzo/");
+                    desk.browse(url);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(viewMenu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(viewMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
+        }
+    }//GEN-LAST:event_lblLinkedinMouseClicked
+
+    private void lblGitHubMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGitHubMouseClicked
+        if (java.awt.Desktop.isDesktopSupported()){
+            
+            java.awt.Desktop desk = java.awt.Desktop.getDesktop();
+            
+            if (desk.isSupported(java.awt.Desktop.Action.BROWSE)){
+                try {
+                    java.net.URI url = new java.net.URI("https://github.com/Kenma12");
+                    desk.browse(url);
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(viewMenu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(viewMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
+        }
+    }//GEN-LAST:event_lblGitHubMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JpanelMenu;
     private javax.swing.JButton btnAltaComidas1;
@@ -213,8 +279,11 @@ public class viewMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnAltaPacienteView;
     private javax.swing.JButton btnHomeView;
     private javax.swing.JPanel content;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblFondoMenu;
+    private javax.swing.JLabel lblGitHub;
+    private javax.swing.JLabel lblLinkedin;
     // End of variables declaration//GEN-END:variables
 }
